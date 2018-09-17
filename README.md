@@ -7,3 +7,7 @@ https://github.com/neolink557/proyecto-final-poo/blob/master/Art2/First%20concep
 https://github.com/neolink557/proyecto-final-poo/blob/master/Art2/First%20concept.psd
 
 https://github.com/neolink557/proyecto-final-poo/blob/master/Art2/First%20conceptdigital.jpg
+
+Concepto inicio
+
+https://github.com/neolink557/proyecto-final-poo/blob/master/Art2/Concepy.Inicio.jpg
