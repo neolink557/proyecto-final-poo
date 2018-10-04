@@ -89,7 +89,7 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
     }
-    Change i = new Change();
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private animation.MiCanvas lienzo;
     // End of variables declaration//GEN-END:variables

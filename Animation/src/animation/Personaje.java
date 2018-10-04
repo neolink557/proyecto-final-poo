@@ -23,6 +23,7 @@ public class Personaje {
     Dimension tamaño = Toolkit.getDefaultToolkit().getScreenSize();
     ArrayList<String> actual;
 
+    int velocidad = 5;
     int contador = 0;
     int x = 10;
     int y = 10;
@@ -37,6 +38,7 @@ public class Personaje {
         adelante.add("/imagenes/s7.png");
         adelante.add("/imagenes/s8.png");
         adelante.add("/imagenes/s9.png");
+        adelante.add("/imagenes/s10.png");
 
         atras.add("/imagenes/w1.png");
         atras.add("/imagenes/w2.png");
@@ -57,6 +59,7 @@ public class Personaje {
         izquierda.add("/imagenes/a7.png");
         izquierda.add("/imagenes/a8.png");
         izquierda.add("/imagenes/a9.png");
+        izquierda.add("/imagenes/a10.png");
 
         derecha.add("/imagenes/d1.png");
         derecha.add("/imagenes/d2.png");
@@ -67,37 +70,41 @@ public class Personaje {
         derecha.add("/imagenes/d7.png");
         derecha.add("/imagenes/d8.png");
         derecha.add("/imagenes/d9.png");
+        derecha.add("/imagenes/d10.png");
 
         this.actual = this.atras;
     }
 
     public void actualizar(char accion) {
+        
         switch (accion) {
             case 'w':
                 this.actual = this.atras;
-                y = y - 3;
+                y = y - velocidad;
 
                 break;
             case 's':
                 this.actual = this.adelante;
-                y = y + 3;
+                y = y + velocidad;
 
                 break;
             case 'a':
                 this.actual = this.izquierda;
-                x = x - 3;
+                x = x - velocidad;
 
                 break;
             case 'd':
                 this.actual = this.derecha;
-                x = x + 3;
+                x = x + velocidad;
 
                 break;
         }
         contador = contador + 1;
         contador = contador % 9;
+        
 
-        System.out.println(contador + "<-");
+        
+        System.out.println(contador+"<-");
     }
 
     public void draw(Graphics g) {
