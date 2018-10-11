@@ -17,6 +17,8 @@ import java.util.ArrayList;
 public class MiCanvas extends Canvas {
 
     Personaje p = new Personaje();
+    Personaje2 p2 = new Personaje2();
+    
 
     @Override
     public void setSize(int width, int height) {
@@ -25,7 +27,7 @@ public class MiCanvas extends Canvas {
 
     @Override
     public void paint(Graphics g) {
-
+        p2.draw(g);
         p.draw(g);
     }
 
@@ -44,6 +46,11 @@ public class MiCanvas extends Canvas {
 
     public Personaje getP() {
         return p;
+       
     }
-
+    public Personaje2 getP2() {
+        return p2;
+       
+    }
+    
 }

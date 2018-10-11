@@ -15,23 +15,22 @@ import java.util.ArrayList;
  *
  * @author Estudiantes
  */
-public class Personaje {
-    
-    
+public class Personaje2 {
+
     ArrayList<String> adelante = new ArrayList();
     ArrayList<String> atras = new ArrayList();
     ArrayList<String> izquierda = new ArrayList();
     ArrayList<String> derecha = new ArrayList();
     Dimension tamaño = Toolkit.getDefaultToolkit().getScreenSize();
     ArrayList<String> actual;
-    Personaje2 p2 = new Personaje2();
-    
-    int velocidad = 5;
-    int contador = 0;
-    int x = 500;
-    int y = 500;
+    Cambio cambio = new Cambio();
 
-    public Personaje() {
+    int velocidad = 15;
+    int contador = 0;
+    int x = 200;
+    int y = 200;
+
+    public Personaje2() {
         adelante.add("/imagenes/s1.png");
         adelante.add("/imagenes/s2.png");
         adelante.add("/imagenes/s3.png");
@@ -79,58 +78,25 @@ public class Personaje {
     }
 
     public void actualizar(char accion) {
-  
-        
-        
         switch (accion) {
-            case 'w':
+            case 'i':
                 this.actual = this.atras;
-                if(getbounds().intersects(p2.getbounds())==true)
-                {
-                    y=y;
-                    System.out.println("si");
-                }
-                else{
-                y = y - velocidad;
-                }
+                y = cambio.change(velocidad, y, "atras");
+
                 break;
-            case 's':
+            case 'k':
                 this.actual = this.adelante;
-                if(getbounds().intersects(p2.getbounds())==true)
-                {
-                    y=y;
-                    System.out.println("si");
-                }
-                else{
-                      y = y + velocidad;
-                }
-              
+                y = cambio.change(velocidad, y, "adelante");
 
                 break;
-            case 'a':
+            case 'j':
                 this.actual = this.izquierda;
-                if(getbounds().intersects(p2.getbounds())==true)
-                {
-                    x=x;
-                    System.out.println("si");
-                }
-                else
-                {
-                x = x - velocidad;
-                }
+                x = cambio.change(velocidad, x, "izquierda");
 
                 break;
-            case 'd':
+            case 'l':
                 this.actual = this.derecha;
-                if(getbounds().intersects(p2.getbounds())==true)
-                {
-                    x=x;
-                    System.out.println("si");
-                }
-                else
-                {
-                x = x + velocidad;
-                }
+                x = cambio.change(velocidad, x, "derecha");
 
                 break;
         }
@@ -140,12 +106,13 @@ public class Personaje {
         System.out.println(contador + "<-");
     }
 
-   public Rectangle getbounds() {
-        return new Rectangle(x, y, 200, 200);
+    public Rectangle getbounds() {
+        return new Rectangle(x, y, 200,200);
 
     }
 
     public void draw(Graphics g) {
         g.drawImage(new javax.swing.ImageIcon(getClass().getResource(actual.get(contador))).getImage(), this.x, this.y, null);
     }
+
 }

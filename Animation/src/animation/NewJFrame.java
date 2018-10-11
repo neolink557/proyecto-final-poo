@@ -53,6 +53,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void lienzoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lienzoKeyPressed
         // TODO add your handling code here:
+        lienzo.getP2().actualizar(evt.getKeyChar());
         lienzo.getP().actualizar(evt.getKeyChar());
         lienzo.repaint();
         lienzo.setSize(1820, 980);
