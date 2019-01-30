@@ -2,6 +2,7 @@ package Main;
 
 import BackGrounds.BackGrounds;
 import Characthers.Steve;
+import Powers.StevePower;
 import java.awt.event.KeyEvent;
 
 /*
@@ -18,6 +19,7 @@ public class NewJFrame extends javax.swing.JFrame {
     Steve steve;
     int change=1;
     BackGrounds bg;
+    int lastkey = 0;
     /**
      * Creates new form NewJFrame
      */
@@ -133,6 +135,7 @@ public class NewJFrame extends javax.swing.JFrame {
         direccionD[8]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d8.png";
         direccionD[9]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d9.png";
         
+        System.out.println(lastkey);
         switch(evt.getKeyCode())
         {
             case 83:
@@ -142,6 +145,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 change=1;
                 y=y+10;
                 steve.DrawChar(jPanel1.getGraphics(), x, y, direccionS[change]);
+                lastkey=83;
                 break;
             case 87:
                 change ++;
@@ -149,13 +153,16 @@ public class NewJFrame extends javax.swing.JFrame {
                 change=1;
                 y=y-10;
                 steve.DrawChar(jPanel1.getGraphics(), x, y, direccionW[change]);
+                lastkey=87;
                 break;
+                
             case 65:
                 change ++;
                 if(change == 9)
                 change=1;
                 x=x-10;
                 steve.DrawChar(jPanel1.getGraphics(), x, y, direccionA[change]);
+                lastkey=65;
                 break;
             case 68:
                 change ++;
@@ -163,6 +170,12 @@ public class NewJFrame extends javax.swing.JFrame {
                 change=1;
                 x=x+10;
                 steve.DrawChar(jPanel1.getGraphics(), x, y, direccionD[change]);
+                lastkey=68;
+                break;
+                
+            case 69:
+                StevePower powa = new StevePower(jPanel1, x, y, steve,lastkey);
+                powa.start();
                 break;
                 
         }

@@ -17,6 +17,7 @@ public class Steve {
     int x;
     int y;
     int change;
+    String dir;
 
     public void setChange(int change) {
         this.change = change;
@@ -26,11 +27,12 @@ public class Steve {
         return change;
     }
     JPanel MiJP;
-    JPanel MiJP2;
+    
    public Steve(JPanel miJ){
         this.x=0;
         this.y=0;
         this.MiJP=miJ;
+        
     }
     
     public void DrawChar(Graphics g,int xi , int yi,String Direccion)
@@ -38,6 +40,7 @@ public class Steve {
         
         this.x=xi;
         this.y=yi;
+        this.dir=Direccion;
         ImageIcon MiImagen=new ImageIcon(Direccion);
         g.drawImage(MiImagen.getImage(), xi, yi, MiJP);
         
@@ -52,5 +55,10 @@ public class Steve {
         return this.y;
     }
     
+    public String direccion()
+    {
+        return this.dir;
+        
+    }
 
 }
