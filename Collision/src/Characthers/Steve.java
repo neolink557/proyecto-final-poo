@@ -31,7 +31,6 @@ public class Steve {
         this.x=0;
         this.y=0;
         this.MiJP=miJ;
-        this.MiJP2=miJ;
     }
     
     public void DrawChar(Graphics g,int xi , int yi,String Direccion)
@@ -40,9 +39,9 @@ public class Steve {
         this.x=xi;
         this.y=yi;
         ImageIcon MiImagen=new ImageIcon(Direccion);
-      
         g.drawImage(MiImagen.getImage(), xi, yi, MiJP);
         this.MiJP.update(g);
+        
     }
     
     public int CoordX(){
