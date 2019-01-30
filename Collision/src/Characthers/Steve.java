@@ -40,7 +40,7 @@ public class Steve {
         this.y=yi;
         ImageIcon MiImagen=new ImageIcon(Direccion);
         g.drawImage(MiImagen.getImage(), xi, yi, MiJP);
-        this.MiJP.update(g);
+        
         
     }
     

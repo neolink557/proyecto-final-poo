@@ -166,39 +166,6 @@ public class NewJFrame extends javax.swing.JFrame {
                 break;
                 
         }
-                
-        if(evt.getKeyCode() == 83)
-        {
-            
-            
-            
-        }
-        if(evt.getKeyCode() == 87)
-        {
-            change ++;
-            
-            steve.DrawChar(jPanel1.getGraphics(), x, y, direccionW[change]);
-            if(change == 9)
-                change=1;
-            
-            
-        }
-        if(evt.getKeyCode() == 65)
-        {
-            change ++;
-            steve.DrawChar(jPanel1.getGraphics(), x, y, direccionS[change]);
-            if(change == 9)
-                change=1;
-            
-        }
-        if(evt.getKeyCode() == 68)
-        {
-            change ++;
-            steve.DrawChar(jPanel1.getGraphics(), x, y, direccionS[change]);
-            if(change == 9)
-                change=1;
-            
-        }
         
     }//GEN-LAST:event_formKeyPressed
 
