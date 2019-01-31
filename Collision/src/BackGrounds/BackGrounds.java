@@ -1,6 +1,5 @@
 package BackGrounds;
 
-
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -10,20 +9,21 @@ import javax.swing.JPanel;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Braya
  */
 public class BackGrounds {
-        JPanel MiJPB;
+
+    JPanel MiJPB;
+
     public BackGrounds(JPanel miJ) {
-        this.MiJPB=miJ;
+        this.MiJPB = miJ;
     }
-    public void DrawBack(Graphics g,String Direccion)
-    {
-        ImageIcon MiImagen=new ImageIcon(Direccion);
+
+    public void DrawBack(Graphics g, String Direccion) {
+        ImageIcon MiImagen = new ImageIcon(Direccion);
         g.drawImage(MiImagen.getImage(), 0, 0, MiJPB);
     }
-    
+
 }

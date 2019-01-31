@@ -11,28 +11,27 @@ import java.awt.event.KeyEvent;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Braya
  */
 public class NewJFrame extends javax.swing.JFrame {
+
     Steve steve;
     Enemy enemy;
     StevePower powa;
-    int change=1;
+    int change = 1;
     BackGrounds bg;
-    
+
     /**
      * Creates new form NewJFrame
      */
     public NewJFrame() {
         initComponents();
-        bg=new BackGrounds(jPanel1);
-        steve=new Steve(jPanel1);
-        enemy=new Enemy(jPanel1, 0, 0, steve);
+        bg = new BackGrounds(jPanel1);
+        steve = new Steve(jPanel1);
+        enemy = new Enemy(jPanel1, 0, 0, steve);
         enemy.start();
-        steve.start();
         steve.setDir("C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s1.png");
     }
 
@@ -95,105 +94,107 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
-        int x,y;
-        
-        x=steve.CoordX();
-        y=steve.CoordY();
-        
-        String direccionS[]=new String[10];
-        direccionS[1]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s1.png";
-        direccionS[2]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s2.png";
-        direccionS[3]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s3.png";
-        direccionS[4]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s4.png";
-        direccionS[5]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s5.png";
-        direccionS[6]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s6.png";
-        direccionS[7]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s7.png";
-        direccionS[8]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s8.png";
-        direccionS[9]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s9.png";
-        String direccionW[]=new String[10];
-        direccionW[1]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w1.png";
-        direccionW[2]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w2.png";
-        direccionW[3]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w3.png";
-        direccionW[4]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w4.png";
-        direccionW[5]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w5.png";
-        direccionW[6]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w6.png";
-        direccionW[7]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w7.png";
-        direccionW[8]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w8.png";
-        direccionW[9]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w9.png";
-        String direccionA[]=new String[10];
-        direccionA[1]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a1.png";
-        direccionA[2]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a2.png";
-        direccionA[3]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a3.png";
-        direccionA[4]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a4.png";
-        direccionA[5]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a5.png";
-        direccionA[6]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a6.png";
-        direccionA[7]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a7.png";
-        direccionA[8]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al ladoe/a8.png";
-        direccionA[9]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a9.png";
-        String direccionD[]=new String[10];
-        direccionD[1]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d1.png";
-        direccionD[2]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d2.png";
-        direccionD[3]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d3.png";
-        direccionD[4]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d4.png";
-        direccionD[5]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d5.png";
-        direccionD[6]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d6.png";
-        direccionD[7]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d7.png";
-        direccionD[8]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d8.png";
-        direccionD[9]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d9.png";
-        
-    
-        switch(evt.getKeyCode())
-        {
+        int x, y;
+
+        x = steve.CoordX();
+        y = steve.CoordY();
+
+        String direccionS[] = new String[10];
+        direccionS[1] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s1.png";
+        direccionS[2] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s2.png";
+        direccionS[3] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s3.png";
+        direccionS[4] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s4.png";
+        direccionS[5] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s5.png";
+        direccionS[6] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s6.png";
+        direccionS[7] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s7.png";
+        direccionS[8] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s8.png";
+        direccionS[9] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s9.png";
+        String direccionW[] = new String[10];
+        direccionW[1] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w1.png";
+        direccionW[2] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w2.png";
+        direccionW[3] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w3.png";
+        direccionW[4] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w4.png";
+        direccionW[5] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w5.png";
+        direccionW[6] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w6.png";
+        direccionW[7] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w7.png";
+        direccionW[8] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w8.png";
+        direccionW[9] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w9.png";
+        String direccionA[] = new String[10];
+        direccionA[1] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a1.png";
+        direccionA[2] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a2.png";
+        direccionA[3] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a3.png";
+        direccionA[4] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a4.png";
+        direccionA[5] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a5.png";
+        direccionA[6] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a6.png";
+        direccionA[7] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a7.png";
+        direccionA[8] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al ladoe/a8.png";
+        direccionA[9] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a9.png";
+        String direccionD[] = new String[10];
+        direccionD[1] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d1.png";
+        direccionD[2] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d2.png";
+        direccionD[3] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d3.png";
+        direccionD[4] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d4.png";
+        direccionD[5] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d5.png";
+        direccionD[6] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d6.png";
+        direccionD[7] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d7.png";
+        direccionD[8] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d8.png";
+        direccionD[9] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d9.png";
+
+        switch (evt.getKeyCode()) {
             case 83:
-                
-                change ++;
-                if(change == 9)
-                change=1;
-                y=y+10;
+
+                change++;
+                if (change == 9) {
+                    change = 1;
+                }
+                y = y + 10;
                 steve.DrawChar(jPanel1.getGraphics(), x, y, direccionS[change]);
                 steve.setLastkey(83);
                 break;
             case 87:
-                change ++;
-                if(change == 9)
-                change=1;
-                y=y-10;
+                change++;
+                if (change == 9) {
+                    change = 1;
+                }
+                y = y - 10;
                 steve.DrawChar(jPanel1.getGraphics(), x, y, direccionW[change]);
                 steve.setLastkey(87);
                 break;
-                
+
             case 65:
-                change ++;
-                if(change == 9)
-                change=1;
-                x=x-10;
+                change++;
+                if (change == 9) {
+                    change = 1;
+                }
+                x = x - 10;
                 steve.DrawChar(jPanel1.getGraphics(), x, y, direccionA[change]);
                 steve.setLastkey(65);
                 break;
             case 68:
-                change ++;
-                if(change == 9)
-                change=1;
-                x=x+10;
+                change++;
+                if (change == 9) {
+                    change = 1;
+                }
+                x = x + 10;
                 steve.DrawChar(jPanel1.getGraphics(), x, y, direccionD[change]);
                 steve.setLastkey(68);
                 break;
-                
+
             case 69:
-                powa = new StevePower(jPanel1, x, y, steve,steve.getLastkey(),enemy);
+                powa = new StevePower(jPanel1, x, y, steve, steve.getLastkey(), enemy);
                 powa.start();
                 enemy.setCol(false);
                 break;
-                
+
         }
-        
+
     }//GEN-LAST:event_formKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-             // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_formWindowActivated
 
     /**
@@ -222,14 +223,12 @@ public class NewJFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewJFrame().setVisible(true);
-                    
-                
+
             }
         });
     }

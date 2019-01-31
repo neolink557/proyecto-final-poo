@@ -13,11 +13,13 @@ import javax.swing.JPanel;
  *
  * @author Braya
  */
-public class Steve extends Thread{
-    int x;
-    int y;
+public class Steve {
+
+    int x, y;
     int change;
     int lastkey;
+    int anchos;
+    int altos;
 
     public int getLastkey() {
         return lastkey;
@@ -40,38 +42,35 @@ public class Steve extends Thread{
         return change;
     }
     JPanel MiJP;
-    
-   public Steve(JPanel miJ){
-        this.x=0;
-        this.y=0;
-        this.MiJP=miJ;
-        
+
+    public Steve(JPanel miJ) {
+        this.x = 0;
+        this.y = 0;
+        this.MiJP = miJ;
     }
-    
-    public void DrawChar(Graphics g,int xi , int yi,String Direccion)
-    {
-        
-        this.x=xi;
-        this.y=yi;
-        this.dir=Direccion;
-        ImageIcon MiImagen=new ImageIcon(Direccion);
+
+    public void DrawChar(Graphics g, int xi, int yi, String Direccion) {
+
+        this.x = xi;
+        this.y = yi;
+        this.dir = Direccion;
+        ImageIcon MiImagen = new ImageIcon(Direccion);
         g.drawImage(MiImagen.getImage(), xi, yi, MiJP);
-        
-        
+        altos = MiImagen.getIconHeight();
+        anchos = MiImagen.getIconWidth();
     }
-    
-    public int CoordX(){
+
+    public int CoordX() {
         return this.x;
     }
-    
-    public int CoordY(){
+
+    public int CoordY() {
         return this.y;
     }
-    
-    public String direccion()
-    {
+
+    public String direccion() {
         return this.dir;
-        
+
     }
 
 }
