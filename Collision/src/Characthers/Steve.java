@@ -13,10 +13,23 @@ import javax.swing.JPanel;
  *
  * @author Braya
  */
-public class Steve {
+public class Steve extends Thread{
     int x;
     int y;
     int change;
+    int lastkey;
+
+    public int getLastkey() {
+        return lastkey;
+    }
+
+    public void setLastkey(int lastkey) {
+        this.lastkey = lastkey;
+    }
+
+    public void setDir(String dir) {
+        this.dir = dir;
+    }
     String dir;
 
     public void setChange(int change) {

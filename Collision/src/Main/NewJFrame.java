@@ -1,6 +1,7 @@
 package Main;
 
 import BackGrounds.BackGrounds;
+import Characthers.Enemy;
 import Characthers.Steve;
 import Powers.StevePower;
 import java.awt.event.KeyEvent;
@@ -17,9 +18,11 @@ import java.awt.event.KeyEvent;
  */
 public class NewJFrame extends javax.swing.JFrame {
     Steve steve;
+    Enemy enemy;
+    StevePower powa;
     int change=1;
     BackGrounds bg;
-    int lastkey = 0;
+    
     /**
      * Creates new form NewJFrame
      */
@@ -27,7 +30,10 @@ public class NewJFrame extends javax.swing.JFrame {
         initComponents();
         bg=new BackGrounds(jPanel1);
         steve=new Steve(jPanel1);
-        
+        enemy=new Enemy(jPanel1, 0, 0, steve);
+        enemy.start();
+        steve.start();
+        steve.setDir("C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s1.png");
     }
 
     /**
@@ -135,7 +141,7 @@ public class NewJFrame extends javax.swing.JFrame {
         direccionD[8]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d8.png";
         direccionD[9]="C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d9.png";
         
-        System.out.println(lastkey);
+    
         switch(evt.getKeyCode())
         {
             case 83:
@@ -145,7 +151,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 change=1;
                 y=y+10;
                 steve.DrawChar(jPanel1.getGraphics(), x, y, direccionS[change]);
-                lastkey=83;
+                steve.setLastkey(83);
                 break;
             case 87:
                 change ++;
@@ -153,7 +159,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 change=1;
                 y=y-10;
                 steve.DrawChar(jPanel1.getGraphics(), x, y, direccionW[change]);
-                lastkey=87;
+                steve.setLastkey(87);
                 break;
                 
             case 65:
@@ -162,7 +168,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 change=1;
                 x=x-10;
                 steve.DrawChar(jPanel1.getGraphics(), x, y, direccionA[change]);
-                lastkey=65;
+                steve.setLastkey(65);
                 break;
             case 68:
                 change ++;
@@ -170,12 +176,13 @@ public class NewJFrame extends javax.swing.JFrame {
                 change=1;
                 x=x+10;
                 steve.DrawChar(jPanel1.getGraphics(), x, y, direccionD[change]);
-                lastkey=68;
+                steve.setLastkey(68);
                 break;
                 
             case 69:
-                StevePower powa = new StevePower(jPanel1, x, y, steve,lastkey);
+                powa = new StevePower(jPanel1, x, y, steve,steve.getLastkey(),enemy);
                 powa.start();
+                enemy.setCol(false);
                 break;
                 
         }
