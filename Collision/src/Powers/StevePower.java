@@ -8,6 +8,7 @@ package Powers;
 import Characthers.Enemy;
 import Characthers.Steve;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -25,7 +26,7 @@ public class StevePower extends Thread {
     Graphics g;
     String direct;
     Enemy enemy;
-
+    Image imagen = new ImageIcon(getClass().getResource("../resources/powers/Stevepower.png")).getImage();
     public StevePower(JPanel miJ, int xi, int yi, Steve misteve, int key, Enemy enemy) {
         super();
         this.g = miJ.getGraphics();
@@ -33,7 +34,6 @@ public class StevePower extends Thread {
         this.x = xi;
         this.y = yi;
         this.misteve = misteve;
-        this.direct = misteve.direccion();
         this.key = key;
         this.enemy = enemy;
     }
@@ -44,34 +44,34 @@ public class StevePower extends Thread {
 
             try {
 
-                ImageIcon MiImagen = new ImageIcon("C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/powers/Stevepower.png");
+                
                 switch (key) {
                     case 83:
-                        g.drawImage(MiImagen.getImage(), (x + 100), (y + 150) + j * 25, miJP);
+                        g.drawImage(imagen, (x + 100), (y + 150) + j * 25, null);
                         StevePower.sleep(50);
-                        this.miJP.update(g);
-                        misteve.DrawChar(g, x, y, direct);
+                        
+                       
 
                         break;
                     case 87:
-                        g.drawImage(MiImagen.getImage(), (x + 100), (y + 150) - j * 25, miJP);
+                        g.drawImage(imagen, (x + 100), (y + 150) - j * 25, null);
                         StevePower.sleep(50);
-                        this.miJP.update(g);
-                        misteve.DrawChar(g, x, y, direct);
+                        
+                        
 
                         break;
                     case 65:
-                        g.drawImage(MiImagen.getImage(), x - j * 25, (y + 150), miJP);
+                        g.drawImage(imagen, x - j * 25, (y + 150), null);
                         StevePower.sleep(50);
-                        this.miJP.update(g);
-                        misteve.DrawChar(g, x, y, direct);
+                        
+                        
 
                         break;
                     case 68:
-                        g.drawImage(MiImagen.getImage(), (x + 100) + j * 25, (y + 150), miJP);
+                        g.drawImage(imagen, (x + 100) + j * 25, (y + 150), null);
                         StevePower.sleep(50);
-                        this.miJP.update(g);
-                        misteve.DrawChar(g, x, y, direct);
+                        
+                       
 
                         break;
                 }

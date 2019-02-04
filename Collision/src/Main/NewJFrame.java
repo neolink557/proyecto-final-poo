@@ -1,6 +1,7 @@
 package Main;
 
 import BackGrounds.BackGrounds;
+import BackGrounds.Refresh;
 import Characthers.Enemy;
 import Characthers.Steve;
 import Powers.StevePower;
@@ -22,6 +23,7 @@ public class NewJFrame extends javax.swing.JFrame {
     StevePower powa;
     int change = 1;
     BackGrounds bg;
+    Refresh refresh;
 
     /**
      * Creates new form NewJFrame
@@ -30,9 +32,14 @@ public class NewJFrame extends javax.swing.JFrame {
         initComponents();
         bg = new BackGrounds(jPanel1);
         steve = new Steve(jPanel1);
+        steve.setActual(steve.getSkey(1));
+        steve.DrawChar(jPanel1.getGraphics(), 500, 500, steve.getActual());
         enemy = new Enemy(jPanel1, 0, 0, steve);
+        enemy.DrawEnemy(jPanel1.getGraphics(), enemy.getX(),enemy.getY());
         enemy.start();
-        steve.setDir("C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s1.png");
+        refresh = new Refresh(jPanel1, enemy, steve, powa);
+        refresh.start();
+
     }
 
     /**
@@ -94,100 +101,120 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
-        int x, y;
+        int x, y,j;
 
         x = steve.CoordX();
         y = steve.CoordY();
+        j=15;
+        if (steve.colision(enemy.getX(), enemy.getY(), enemy.getAltoe(), enemy.getAnchoe(), steve.CoordX(), steve.CoordY(), steve.getAltos(), steve.getAnchos())) {
+            steve.DrawChar(jPanel1.getGraphics(), x, y, steve.getDeath());
+            steve.setActual(steve.getDeath());
+            
+        } else {
 
-        String direccionS[] = new String[10];
-        direccionS[1] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s1.png";
-        direccionS[2] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s2.png";
-        direccionS[3] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s3.png";
-        direccionS[4] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s4.png";
-        direccionS[5] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s5.png";
-        direccionS[6] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s6.png";
-        direccionS[7] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s7.png";
-        direccionS[8] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s8.png";
-        direccionS[9] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Adelante/s9.png";
-        String direccionW[] = new String[10];
-        direccionW[1] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w1.png";
-        direccionW[2] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w2.png";
-        direccionW[3] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w3.png";
-        direccionW[4] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w4.png";
-        direccionW[5] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w5.png";
-        direccionW[6] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w6.png";
-        direccionW[7] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w7.png";
-        direccionW[8] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w8.png";
-        direccionW[9] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/Atras/w9.png";
-        String direccionA[] = new String[10];
-        direccionA[1] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a1.png";
-        direccionA[2] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a2.png";
-        direccionA[3] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a3.png";
-        direccionA[4] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a4.png";
-        direccionA[5] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a5.png";
-        direccionA[6] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a6.png";
-        direccionA[7] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a7.png";
-        direccionA[8] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al ladoe/a8.png";
-        direccionA[9] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al lado/a9.png";
-        String direccionD[] = new String[10];
-        direccionD[1] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d1.png";
-        direccionD[2] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d2.png";
-        direccionD[3] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d3.png";
-        direccionD[4] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d4.png";
-        direccionD[5] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d5.png";
-        direccionD[6] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d6.png";
-        direccionD[7] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d7.png";
-        direccionD[8] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d8.png";
-        direccionD[9] = "C:/Users/Braya/OneDrive/Documents/NetBeansProjects/Collision/src/resources/al otro lado v/d9.png";
+            switch (evt.getKeyCode()) {
+                case 83:
 
-        switch (evt.getKeyCode()) {
-            case 83:
+                    change++;
+                    if (change == 9) {
+                        change = 1;
+                    }
 
-                change++;
-                if (change == 9) {
-                    change = 1;
-                }
-                y = y + 10;
-                steve.DrawChar(jPanel1.getGraphics(), x, y, direccionS[change]);
-                steve.setLastkey(83);
-                break;
-            case 87:
-                change++;
-                if (change == 9) {
-                    change = 1;
-                }
-                y = y - 10;
-                steve.DrawChar(jPanel1.getGraphics(), x, y, direccionW[change]);
-                steve.setLastkey(87);
-                break;
+                    y = y + j;
+                    steve.DrawChar(jPanel1.getGraphics(), x, y, steve.getSkey(change));
+                    steve.setLastkey(83);
+                    steve.setActual(steve.getSkey(change));
+                    break;
+                case 87:
+                    change++;
+                    if (change == 9) {
+                        change = 1;
+                    }
 
-            case 65:
-                change++;
-                if (change == 9) {
-                    change = 1;
-                }
-                x = x - 10;
-                steve.DrawChar(jPanel1.getGraphics(), x, y, direccionA[change]);
-                steve.setLastkey(65);
-                break;
-            case 68:
-                change++;
-                if (change == 9) {
-                    change = 1;
-                }
-                x = x + 10;
-                steve.DrawChar(jPanel1.getGraphics(), x, y, direccionD[change]);
-                steve.setLastkey(68);
-                break;
+                    y = y - j;
+                    steve.DrawChar(jPanel1.getGraphics(), x, y, steve.getWkey(change));
+                    steve.setLastkey(87);
+                    steve.setActual(steve.getWkey(change));
 
-            case 69:
-                powa = new StevePower(jPanel1, x, y, steve, steve.getLastkey(), enemy);
-                powa.start();
-                enemy.setCol(false);
-                break;
+                    break;
+
+                case 65:
+                    change++;
+                    if (change == 9) {
+                        change = 1;
+                    }
+
+                    x = x - j;
+                    steve.DrawChar(jPanel1.getGraphics(), x, y, steve.getAkey(change));
+                    steve.setLastkey(65);
+                    steve.setActual(steve.getAkey(change));
+                    break;
+                case 68:
+                    change++;
+                    if (change == 9) {
+                        change = 1;
+                    }
+
+                    x = x + j;
+                    steve.DrawChar(jPanel1.getGraphics(), x, y, steve.getDkey(change));
+                    steve.setLastkey(68);
+                    steve.setActual(steve.getDkey(change));
+                    break;
+
+                case 69:
+                    change++;
+                    if (change == 9) {
+                        change = 1;
+                    }
+
+                    x = x + j;
+                    y = y - j;
+                    steve.DrawChar(jPanel1.getGraphics(), x, y, steve.getDkey(change));
+                    steve.setLastkey(68);
+                    steve.setActual(steve.getDkey(change));
+                    break;
+                case 81:
+                    change++;
+                    if (change == 9) {
+                        change = 1;
+                    }
+                    x = x - j;
+                    y = y - j;
+                    steve.DrawChar(jPanel1.getGraphics(), x, y, steve.getAkey(change));
+                    steve.setLastkey(68);
+                    steve.setActual(steve.getAkey(change));
+                    break;
+                case 89:
+                    change++;
+                    if (change == 9) {
+                        change = 1;
+                    }
+                    x = x - j;
+                    y = y + j;
+                    steve.DrawChar(jPanel1.getGraphics(), x, y, steve.getAkey(change));
+                    steve.setLastkey(68);
+                    steve.setActual(steve.getAkey(change));
+                    break;
+                    case 67:
+                    change++;
+                    if (change == 9) {
+                        change = 1;
+                    }
+                    x = x + j;
+                    y = y + j;
+                    steve.DrawChar(jPanel1.getGraphics(), x, y, steve.getDkey(change));
+                    steve.setLastkey(68);
+                    steve.setActual(steve.getDkey(change));
+                    break;
+                case 88:
+                    powa = new StevePower(jPanel1, x, y, steve, steve.getLastkey(), enemy);
+                    powa.start();
+
+                    break;
+
+            }
 
         }
-
     }//GEN-LAST:event_formKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
