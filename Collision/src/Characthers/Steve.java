@@ -19,7 +19,7 @@ public class Steve {
 
     int x, y;
     int change;
-    int lastkey;
+    int lastkey = 83;
     int anchos;
     int altos;
     Image actual;
@@ -31,7 +31,7 @@ public class Steve {
     public void setActual(Image setactual) {
         this.actual = setactual;
     }
-    Image death =new ImageIcon(getClass().getResource("../resources/death/death.png")).getImage();
+    Image death = new ImageIcon(getClass().getResource("../resources/death/death.png")).getImage();
 
     public Image getDeath() {
         return death;
@@ -40,7 +40,7 @@ public class Steve {
     public void setDeath(Image death) {
         this.death = death;
     }
-    Image[]skey = {new ImageIcon(getClass().getResource("../resources/Adelante/s1.png")).getImage(),
+    Image[] skey = {new ImageIcon(getClass().getResource("../resources/Adelante/s1.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/Adelante/s2.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/Adelante/s3.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/Adelante/s4.png")).getImage(),
@@ -50,7 +50,7 @@ public class Steve {
         new ImageIcon(getClass().getResource("../resources/Adelante/s8.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/Adelante/s9.png")).getImage()
     };
-    Image[]wkey = {new ImageIcon(getClass().getResource("../resources/atras/w1.png")).getImage(),
+    Image[] wkey = {new ImageIcon(getClass().getResource("../resources/atras/w1.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/atras/w2.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/atras/w3.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/atras/w4.png")).getImage(),
@@ -60,17 +60,17 @@ public class Steve {
         new ImageIcon(getClass().getResource("../resources/atras/w8.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/atras/w9.png")).getImage()
     };
-    Image[]dkey = {new ImageIcon(getClass().getResource("../resources/al otro lado v/d1.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/d2.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/d3.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/d4.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/d5.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/d6.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/d7.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/d8.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/d9.png")).getImage()
+    Image[] dkey = {new ImageIcon(getClass().getResource("../resources/al otro lado v/a1.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/al otro lado v/a2.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/al otro lado v/a3.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/al otro lado v/a4.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/al otro lado v/a5.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/al otro lado v/a6.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/al otro lado v/a7.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/al otro lado v/a8.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/al otro lado v/a9.png")).getImage()
     };
-    Image[]akey = {new ImageIcon(getClass().getResource("../resources/al lado/a1.png")).getImage(),
+    Image[] akey = {new ImageIcon(getClass().getResource("../resources/al lado/a1.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/al lado/a2.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/al lado/a3.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/al lado/a4.png")).getImage(),
@@ -96,8 +96,6 @@ public class Steve {
     public Image getWkey(int x) {
         return wkey[x];
     }
-    
- 
 
     public int getLastkey() {
         return lastkey;
@@ -122,11 +120,12 @@ public class Steve {
         this.MiJP = miJ;
     }
 
-    public void DrawChar(Graphics g, int xi, int yi, Image image) {
+    public void DrawChar(int xi, int yi, Image image) {
 
         this.x = xi;
         this.y = yi;
-        g.drawImage(image, xi, yi, null);
+
+        MiJP.getGraphics().drawImage(image, xi, yi, null);
         altos = image.getHeight(null);
         anchos = image.getWidth(null);
     }
@@ -154,6 +153,7 @@ public class Steve {
     public int CoordY() {
         return this.y;
     }
+
     public boolean colision(int x1, int y1, int alto, int ancho, int x2, int y2, int alto2, int ancho2) {
 
         if ((x2 >= x1 && x2 <= (x1 + ancho)) && (y2 >= y1 && y2 <= (y1 + alto))) {

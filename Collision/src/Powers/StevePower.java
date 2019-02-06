@@ -26,7 +26,9 @@ public class StevePower extends Thread {
     Graphics g;
     String direct;
     Enemy enemy;
+    int ancho, alto;
     Image imagen = new ImageIcon(getClass().getResource("../resources/powers/Stevepower.png")).getImage();
+
     public StevePower(JPanel miJ, int xi, int yi, Steve misteve, int key, Enemy enemy) {
         super();
         this.g = miJ.getGraphics();
@@ -36,42 +38,76 @@ public class StevePower extends Thread {
         this.misteve = misteve;
         this.key = key;
         this.enemy = enemy;
+        this.ancho = imagen.getWidth(null);
+        this.alto = imagen.getHeight(null);
+    }
+
+    public void setKey(int key) {
+        this.key = key;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getAncho() {
+        return ancho;
+    }
+
+    public void setAncho(int ancho) {
+        this.ancho = ancho;
+    }
+
+    public int getAlto() {
+        return alto;
+    }
+
+    public void setAlto(int alto) {
+        this.alto = alto;
     }
 
     public void run() {
-
+        x = x + 100;
+        y = y + 150;
         for (int j = 0; j < 10; j++) {
 
             try {
 
-                
                 switch (key) {
                     case 83:
-                        g.drawImage(imagen, (x + 100), (y + 150) + j * 25, null);
+                        y = y + j * 10;
+                        g.drawImage(imagen, x, y, null);
                         StevePower.sleep(50);
-                        
-                       
 
                         break;
                     case 87:
-                        g.drawImage(imagen, (x + 100), (y + 150) - j * 25, null);
+                        y = y - j * 10;
+                        g.drawImage(imagen, x, y, null);
                         StevePower.sleep(50);
-                        
-                        
 
                         break;
                     case 65:
-                        g.drawImage(imagen, x - j * 25, (y + 150), null);
+                        x = x - j * 10;
+                        g.drawImage(imagen, x, y, null);
                         StevePower.sleep(50);
-                        
-                        
 
                         break;
                     case 68:
-                        g.drawImage(imagen, (x + 100) + j * 25, (y + 150), null);
+                        x = x + j * 10;
+                        g.drawImage(imagen, x, y, null);
                         StevePower.sleep(50);
-                        
-                       
 
                         break;
                 }

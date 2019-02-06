@@ -21,18 +21,21 @@ public class Refresh extends Thread{
     Steve steve;
     Enemy enemy;
     StevePower sp;
-    public Refresh(JPanel jpan,Enemy enemy,Steve steve,StevePower sp)
+    BackGrounds bg;
+    public Refresh(JPanel jpan,Enemy enemy,Steve steve,StevePower sp,BackGrounds bg)
     {
         this.jpn=jpan;
        this.enemy = enemy;
        this.steve=steve;
        this.sp=sp;
+       this.bg = bg;
     }
     public void run()
     {
         while(true)
-        {
-             steve.DrawChar(jpn.getGraphics(), steve.CoordX(), steve.CoordY(), steve.getActual());
+        { 
+            
+             steve.DrawChar(steve.CoordX(), steve.CoordY(), steve.getActual());
             try {
                 jpn.update(jpn.getGraphics());
                 Refresh.sleep(50);

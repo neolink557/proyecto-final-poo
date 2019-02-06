@@ -22,24 +22,35 @@ public class Enemy extends Thread {
     int x, y, j;
     int anchoe;
     int altoe;
+
     Steve misteve;
     StevePower powa;
     JPanel miJP;
     Graphics g;
-    boolean col;
-    int c=1;
-    
-    Image[]skey = {new ImageIcon(getClass().getResource("../resources/Adelante/s1.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Adelante/s2.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Adelante/s3.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Adelante/s4.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Adelante/s5.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Adelante/s6.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Adelante/s7.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Adelante/s8.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Adelante/s9.png")).getImage()
+    boolean col = true;
+    int c = 1;
+
+    Image[] death = {new ImageIcon(getClass().getResource("../resources/Enemies/death1.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/Enemies/death2.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/Enemies/death3.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/Enemies/death4.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/Enemies/death5.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/Enemies/death6.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/Enemies/death7.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/Enemies/death8.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/Enemies/death9.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/Enemies/death10.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/Enemies/death11.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/Enemies/death12.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/Enemies/death13.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/Enemies/death14.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/Enemies/death15.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/Enemies/death16.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/Enemies/death17.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/Enemies/death18.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/Enemies/death19.png")).getImage()
     };
-    Image[]wkey = {new ImageIcon(getClass().getResource("../resources/atras/w1.png")).getImage(),
+    Image[] wkey = {new ImageIcon(getClass().getResource("../resources/atras/w1.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/atras/w2.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/atras/w3.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/atras/w4.png")).getImage(),
@@ -49,17 +60,8 @@ public class Enemy extends Thread {
         new ImageIcon(getClass().getResource("../resources/atras/w8.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/atras/w9.png")).getImage()
     };
-    Image[]dkey = {new ImageIcon(getClass().getResource("../resources/al otro lado v/d1.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/d2.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/d3.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/d4.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/d5.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/d6.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/d7.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/d8.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/d9.png")).getImage()
-    };
-    Image[]akey = {new ImageIcon(getClass().getResource("../resources/al lado/a1.png")).getImage(),
+    Image dkey = new ImageIcon(getClass().getResource("../resources/Enemies/s1.png")).getImage();
+    Image[] akey = {new ImageIcon(getClass().getResource("../resources/al lado/a1.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/al lado/a2.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/al lado/a3.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/al lado/a4.png")).getImage(),
@@ -69,13 +71,18 @@ public class Enemy extends Thread {
         new ImageIcon(getClass().getResource("../resources/al lado/a8.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/al lado/a9.png")).getImage()
     };
-    
-    public Enemy(JPanel miJ, int xi, int yi, Steve misteve) {
+
+    public Enemy(JPanel miJ, int xi, int yi, Steve misteve, StevePower powa) {
         super();
         this.g = miJ.getGraphics();
         this.x = xi;
         this.y = yi;
         this.misteve = misteve;
+        this.powa = powa;
+    }
+
+    public void setPowa(StevePower powa) {
+        this.powa = powa;
     }
 
     public boolean isCol() {
@@ -91,7 +98,7 @@ public class Enemy extends Thread {
         this.x = xi;
         this.y = yi;
 
-        g.drawImage(skey[1], xi, yi, null);
+        g.drawImage(dkey, xi, yi, null);
 
     }
 
@@ -128,53 +135,66 @@ public class Enemy extends Thread {
     }
 
     public void run() {
-        
+
         while (true) {
-            int j =5;
-            
+            int j = 5;
+
             try {
-                altoe = skey[1].getHeight(null) - 50;
-                anchoe = skey[1].getWidth(null) - 50;
+                altoe = dkey.getHeight(null) - 50;
+                anchoe = dkey.getWidth(null) - 50;
+                if (col == false) {
+                    this.g.drawImage(death[18], this.x, this.y, null);
+                }
+                else{
                 if (colision(this.x, this.y, this.altoe, this.anchoe, misteve.CoordX(), misteve.CoordY(), misteve.altos, misteve.anchos)) {
 
                 } else {
-                    
-                    while(c<=8)
-                        {
+
+                    if (colision(this.x, this.y, this.altoe, this.anchoe, powa.getX(), powa.getY(), powa.getAlto(), powa.getAncho())) {
+                        for (int i = 1; i < 19; i++) {
+                            this.g.drawImage(death[i], this.x, this.y, null);
+                            Enemy.sleep(50);
+
+                        }
+
+                        col = false;
+                    }
+                    if (col) {
+
+                        while (c <= 8) {
                             c++;
                         }
-                        
-                        while(c>0)
-                        {
+                        while (c > 0) {
                             c--;
                         }
-                    if (this.x <= misteve.CoordX() && this.y <= misteve.CoordY()) {
-                        this.x += j;
-                        this.y += j;
-                        
-                           this.g.drawImage(skey[c], this.x, this.y, null);
-                    }
-                    if (this.x >= misteve.CoordX() && this.y >= misteve.CoordY()) {
-                        this.x -= j;
-                        this.y -= j;
-                        this.g.drawImage(skey[c], this.x, this.y, null);
+                        if (this.x <= misteve.CoordX() && this.y <= misteve.CoordY()) {
+                            this.x += j;
+                            this.y += j;
 
-                    }
-                    if (this.x <= misteve.CoordX() && this.y >= misteve.CoordY()) {
-                        this.x += j;
-                        this.y -= j;
-                        this.g.drawImage(skey[c], this.x, this.y, null);
+                            this.g.drawImage(dkey, this.x, this.y, null);
+                        }
+                        if (this.x >= misteve.CoordX() && this.y >= misteve.CoordY()) {
+                            this.x -= j;
+                            this.y -= j;
+                            this.g.drawImage(dkey, this.x, this.y, null);
 
-                    }
-                    if (this.x >= misteve.CoordX() && this.y <= misteve.CoordY()) {
-                        this.x -= j;
-                        this.y += j;
-                        this.g.drawImage(skey[c], this.x, this.y, null);
+                        }
+                        if (this.x <= misteve.CoordX() && this.y >= misteve.CoordY()) {
+                            this.x += j;
+                            this.y -= j;
+                            this.g.drawImage(dkey, this.x, this.y, null);
 
+                        }
+                        if (this.x >= misteve.CoordX() && this.y <= misteve.CoordY()) {
+                            this.x -= j;
+                            this.y += j;
+                            this.g.drawImage(dkey, this.x, this.y, null);
+
+                        }
                     }
 
                 }
-                
+                }
                 Enemy.sleep(50);
 
             } catch (InterruptedException ex) {

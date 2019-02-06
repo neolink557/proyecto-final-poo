@@ -1,6 +1,7 @@
 package BackGrounds;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -16,14 +17,14 @@ import javax.swing.JPanel;
 public class BackGrounds {
 
     JPanel MiJPB;
+    Image imagen = new ImageIcon(getClass().getResource("../resources/powers/bg.jpg")).getImage();
 
     public BackGrounds(JPanel miJ) {
         this.MiJPB = miJ;
     }
 
-    public void DrawBack(Graphics g, String Direccion) {
-        ImageIcon MiImagen = new ImageIcon(Direccion);
-        g.drawImage(MiImagen.getImage(), 0, 0, MiJPB);
+    public void DrawBack() {
+        MiJPB.getGraphics().drawImage(imagen, 0, 0, null);
     }
 
 }
