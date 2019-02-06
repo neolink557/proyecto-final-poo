@@ -23,6 +23,7 @@ public class NewJFrame extends javax.swing.JFrame {
     Steve steve;
     Enemy enemy;
     Enemy enemy1;
+    Enemy enemy2;
     StevePower powa;
     int change = 1;
     BackGrounds bg;
@@ -37,6 +38,10 @@ public class NewJFrame extends javax.swing.JFrame {
         int z=n.nextInt(1000);
         Random n1 = new Random();
         int z1=n1.nextInt(1000);
+        Random n2 = new Random();
+        int z2=n2.nextInt(1000);
+        Random n3 = new Random();
+        int z3=n3.nextInt(1000);
         bg = new BackGrounds(jPanel1);
         bg.DrawBack();
         steve = new Steve(jPanel1);
@@ -49,6 +54,9 @@ public class NewJFrame extends javax.swing.JFrame {
         enemy1 = new Enemy(jPanel1, 0, 0, steve, powa);
         enemy1.DrawEnemy(jPanel1.getGraphics(), enemy1.getX(), enemy1.getY());
         enemy1.start();
+        enemy2 = new Enemy(jPanel1, z3, z2, steve, powa);
+        enemy2.DrawEnemy(jPanel1.getGraphics(), enemy2.getX(), enemy2.getY());
+        enemy2.start();
         refresh = new Refresh(jPanel1, enemy, steve, powa, bg);
         refresh.start();
 
@@ -120,7 +128,9 @@ public class NewJFrame extends javax.swing.JFrame {
         x = steve.CoordX();
         y = steve.CoordY();
         j = 15;
-        if (steve.colision(enemy.getX(), enemy.getY(), enemy.getAltoe(), enemy.getAnchoe(), steve.CoordX(), steve.CoordY(), steve.getAltos(), steve.getAnchos()) || steve.colision(enemy1.getX(), enemy1.getY(), enemy1.getAltoe(), enemy1.getAnchoe(), steve.CoordX(), steve.CoordY(), steve.getAltos(), steve.getAnchos())) {
+        if (steve.colision(enemy.getX(), enemy.getY(), enemy.getAltoe(), enemy.getAnchoe(), steve.CoordX(), steve.CoordY(), steve.getAltos(), steve.getAnchos()) 
+                || steve.colision(enemy1.getX(), enemy1.getY(), enemy1.getAltoe(), enemy1.getAnchoe(), steve.CoordX(), steve.CoordY(), steve.getAltos(), steve.getAnchos())
+                ||steve.colision(enemy2.getX(), enemy2.getY(), enemy2.getAltoe(), enemy2.getAnchoe(), steve.CoordX(), steve.CoordY(), steve.getAltos(), steve.getAnchos())) {
             steve.DrawChar(x, y, steve.getDeath());
             steve.setActual(steve.getDeath());
 
@@ -179,6 +189,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     powa = new StevePower(jPanel1, x, y, steve, steve.getLastkey(), enemy);
                     powa.start();
                     enemy1.setPowa(powa);
+                    enemy2.setPowa(powa);
                     enemy.setPowa(powa);
                     break;
 
