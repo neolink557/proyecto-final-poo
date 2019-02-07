@@ -19,8 +19,7 @@ import java.util.Random;
  * @author Braya
  */
 public class NewJFrame extends javax.swing.JFrame {
-
-    Steve steve;
+  Steve steve;
     Enemy enemy;
     Enemy enemy1;
     Enemy enemy2;
@@ -34,33 +33,36 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     public NewJFrame() {
         initComponents();
+        //Random para colocar coordenadas al enemigo
         Random n = new Random();
-        int z = n.nextInt(1000);
-        Random n1 = new Random();
-        int z1 = n1.nextInt(1000);
+        int z=n.nextInt(1000);
+        Random n1 = new Random();         /*Mirar como usar un solo random para evitar el uso de todas las z*/
+        int z1=n1.nextInt(1000);            //-----------------------------------------------------------------
         Random n2 = new Random();
-        int z2 = n2.nextInt(1000);
+        int z2=n2.nextInt(1000);
         Random n3 = new Random();
-        int z3 = n3.nextInt(1000);
-        bg = new BackGrounds(jPanel1);
-        bg.DrawBack();
-        steve = new Steve(jPanel1);
-        steve.setActual(steve.getSkey(1));
+        int z3=n3.nextInt(1000);
+        
+        bg = new BackGrounds(jPanel1);//por ahora no hace nada
+        bg.DrawBack();//por ahora nada
+        steve = new Steve(jPanel1);//pasando Jpnal donde se dibuja todo
+        steve.setActual(steve.getSkey(1));//poner imagen (setactual - tecla oprimida)
         steve.DrawChar(500, 500, steve.getActual());
-        powa = new StevePower(jPanel1, -200, -200, steve, steve.getLastkey(), enemy);
-        enemy = new Enemy(jPanel1, z, z1, steve, powa);
+        powa = new StevePower(jPanel1, -200, -200, steve, steve.getLastkey(), enemy);// Enemy pide poder para generar colisiones
+        enemy = new Enemy(jPanel1, z, z1, steve, powa);//Inicializar el hilo del enemigo
         enemy.DrawEnemy(jPanel1.getGraphics(), enemy.getX(), enemy.getY());
         enemy.start();
-        enemy1 = new Enemy(jPanel1, 0, 0, steve, powa);
+        enemy1 = new Enemy(jPanel1, 0, 0, steve, powa);//inicializar para mostar en pantalla
         enemy1.DrawEnemy(jPanel1.getGraphics(), enemy1.getX(), enemy1.getY());
         enemy1.start();
         enemy2 = new Enemy(jPanel1, z3, z2, steve, powa);
         enemy2.DrawEnemy(jPanel1.getGraphics(), enemy2.getX(), enemy2.getY());
         enemy2.start();
-        refresh = new Refresh(jPanel1, enemy, steve, powa, bg);
+        refresh = new Refresh(jPanel1, enemy, steve, powa, bg);//Inicia el hilo
         refresh.start();
 
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
