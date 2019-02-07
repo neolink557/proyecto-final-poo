@@ -23,7 +23,6 @@ public class NewJFrame extends javax.swing.JFrame {
     Steve steve;
     Enemy enemy;
     Enemy enemy1;
-    Enemy enemy2;
     StevePower powa;
     int change = 1;
     BackGrounds bg;
@@ -56,9 +55,6 @@ public class NewJFrame extends javax.swing.JFrame {
         enemy1 = new Enemy(jPanel1, 0, 0, steve, powa);//inicializar para mostar en pantalla
         enemy1.DrawEnemy(jPanel1.getGraphics(), enemy1.getX(), enemy1.getY());
         enemy1.start();
-        enemy2 = new Enemy(jPanel1, z3, z2, steve, powa);
-        enemy2.DrawEnemy(jPanel1.getGraphics(), enemy2.getX(), enemy2.getY());
-        enemy2.start();
         refresh = new Refresh(jPanel1, enemy, steve, powa, bg);//Inicia el hilo
         refresh.start();
 
@@ -131,8 +127,7 @@ public class NewJFrame extends javax.swing.JFrame {
         y = steve.CoordY();
         j = 15;
         if (steve.colision(enemy.getX(), enemy.getY(), enemy.getAltoe(), enemy.getAnchoe(), steve.CoordX(), steve.CoordY(), steve.getAltos(), steve.getAnchos()) 
-                || steve.colision(enemy1.getX(), enemy1.getY(), enemy1.getAltoe(), enemy1.getAnchoe(), steve.CoordX(), steve.CoordY(), steve.getAltos(), steve.getAnchos())
-                ||steve.colision(enemy2.getX(), enemy2.getY(), enemy2.getAltoe(), enemy2.getAnchoe(), steve.CoordX(), steve.CoordY(), steve.getAltos(), steve.getAnchos())) {
+                || steve.colision(enemy1.getX(), enemy1.getY(), enemy1.getAltoe(), enemy1.getAnchoe(), steve.CoordX(), steve.CoordY(), steve.getAltos(), steve.getAnchos())) {
             steve.DrawChar(x, y, steve.getDeath());
             steve.setActual(steve.getDeath());
 
@@ -191,7 +186,6 @@ public class NewJFrame extends javax.swing.JFrame {
                     powa = new StevePower(jPanel1, x, y, steve, steve.getLastkey(), enemy);//lastkyey mira la posicion deonde esta para disparar el poder
                     powa.start();
                     enemy1.setPowa(powa);
-                    enemy2.setPowa(powa);
                     enemy.setPowa(powa);
                     break;
 
