@@ -116,6 +116,8 @@ public class StevePower extends Thread {
                 Logger.getLogger(StevePower.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        this.x=-1000;
+        this.y=-1000;
 
     }
 
