@@ -115,8 +115,8 @@ public class Steve {
     JPanel MiJP;
 
     public Steve(JPanel miJ) {
-        this.x = 500;
-        this.y = 500;
+        this.x = 0;
+        this.y = 0;
         this.MiJP = miJ;
     }
 

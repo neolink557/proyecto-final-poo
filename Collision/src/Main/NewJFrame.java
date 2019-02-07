@@ -43,16 +43,25 @@ public class NewJFrame extends javax.swing.JFrame {
         Random n3 = new Random();
         int z3=n3.nextInt(1000);
         
+       
         bg = new BackGrounds(jPanel1);//por ahora no hace nada
         bg.DrawBack();//por ahora nada
         steve = new Steve(jPanel1);//pasando Jpnal donde se dibuja todo
         steve.setActual(steve.getSkey(1));//poner imagen (setactual - tecla oprimida)
-        steve.DrawChar(500, 500, steve.getActual());
+        steve.DrawChar(900, 700, steve.getActual());
+        
+        if(z3 <= steve.CoordX()-50 && z3 >= steve.CoordX()+50|| z2 <= steve.CoordY()-50 && z2 >= steve.CoordY()+50 || z1 <= steve.CoordY()-50 && z1 >= steve.CoordY()+50  || z <= steve.CoordX()-50 && z >= steve.CoordX()+50){
+            z=n.nextInt(1000);
+            z1=n1.nextInt(1000);
+            z2=n2.nextInt(1000);
+             z3=n3.nextInt(1000);
+            }
+        
         powa = new StevePower(jPanel1, -200, -200, steve, steve.getLastkey(), enemy);// Enemy pide poder para generar colisiones
         enemy = new Enemy(jPanel1, z, z1, steve, powa);//Inicializar el hilo del enemigo
         enemy.DrawEnemy(jPanel1.getGraphics(), enemy.getX(), enemy.getY());
         enemy.start();
-        enemy1 = new Enemy(jPanel1, 0, 0, steve, powa);//inicializar para mostar en pantalla
+        enemy1 = new Enemy(jPanel1, z2,z3, steve, powa);//inicializar para mostar en pantalla
         enemy1.DrawEnemy(jPanel1.getGraphics(), enemy1.getX(), enemy1.getY());
         enemy1.start();
         refresh = new Refresh(jPanel1, enemy, steve, powa, bg);//Inicia el hilo
