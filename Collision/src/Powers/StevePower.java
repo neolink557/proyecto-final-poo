@@ -108,7 +108,7 @@ public class StevePower extends Thread {
                         x = x + j * 10;
                         g.drawImage(imagen, x, y, null);
                         StevePower.sleep(50);
-
+                        
                         break;
                 }
 

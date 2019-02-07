@@ -154,6 +154,7 @@ public class Steve {
         return this.y;
     }
 
+    
     public boolean colision(int x1, int y1, int alto, int ancho, int x2, int y2, int alto2, int ancho2) {
 
         if ((x2 >= x1 && x2 <= (x1 + ancho)) && (y2 >= y1 && y2 <= (y1 + alto))) {

@@ -35,13 +35,13 @@ public class NewJFrame extends javax.swing.JFrame {
     public NewJFrame() {
         initComponents();
         Random n = new Random();
-        int z=n.nextInt(1000);
+        int z = n.nextInt(1000);
         Random n1 = new Random();
-        int z1=n1.nextInt(1000);
+        int z1 = n1.nextInt(1000);
         Random n2 = new Random();
-        int z2=n2.nextInt(1000);
+        int z2 = n2.nextInt(1000);
         Random n3 = new Random();
-        int z3=n3.nextInt(1000);
+        int z3 = n3.nextInt(1000);
         bg = new BackGrounds(jPanel1);
         bg.DrawBack();
         steve = new Steve(jPanel1);
@@ -128,9 +128,9 @@ public class NewJFrame extends javax.swing.JFrame {
         x = steve.CoordX();
         y = steve.CoordY();
         j = 15;
-        if (steve.colision(enemy.getX(), enemy.getY(), enemy.getAltoe(), enemy.getAnchoe(), steve.CoordX(), steve.CoordY(), steve.getAltos(), steve.getAnchos()) 
+        if (steve.colision(enemy.getX(), enemy.getY(), enemy.getAltoe(), enemy.getAnchoe(), steve.CoordX(), steve.CoordY(), steve.getAltos(), steve.getAnchos())
                 || steve.colision(enemy1.getX(), enemy1.getY(), enemy1.getAltoe(), enemy1.getAnchoe(), steve.CoordX(), steve.CoordY(), steve.getAltos(), steve.getAnchos())
-                ||steve.colision(enemy2.getX(), enemy2.getY(), enemy2.getAltoe(), enemy2.getAnchoe(), steve.CoordX(), steve.CoordY(), steve.getAltos(), steve.getAnchos())) {
+                || steve.colision(enemy2.getX(), enemy2.getY(), enemy2.getAltoe(), enemy2.getAnchoe(), steve.CoordX(), steve.CoordY(), steve.getAltos(), steve.getAnchos())) {
             steve.DrawChar(x, y, steve.getDeath());
             steve.setActual(steve.getDeath());
 
@@ -187,10 +187,10 @@ public class NewJFrame extends javax.swing.JFrame {
 
                 case 69:
                     powa = new StevePower(jPanel1, x, y, steve, steve.getLastkey(), enemy);
-                    powa.start();
                     enemy1.setPowa(powa);
                     enemy2.setPowa(powa);
                     enemy.setPowa(powa);
+                    powa.start();
                     break;
 
             }

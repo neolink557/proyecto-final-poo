@@ -30,6 +30,8 @@ public class Enemy extends Thread {
     boolean col = true;
     int c = 1;
 
+    
+
     Image[] death = {new ImageIcon(getClass().getResource("../resources/Enemies/death1.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/Enemies/death2.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/Enemies/death3.png")).getImage(),
@@ -136,7 +138,7 @@ public class Enemy extends Thread {
 
     public void run() {
 
-        while (true) {
+        while (col) {
             int j = 5;
 
             try {
@@ -147,7 +149,7 @@ public class Enemy extends Thread {
                 }
                 else{
                 if (colision(this.x, this.y, this.altoe, this.anchoe, misteve.CoordX(), misteve.CoordY(), misteve.altos, misteve.anchos)) {
-
+                    
                 } else {
 
                     if (colision(this.x, this.y, this.altoe, this.anchoe, powa.getX(), powa.getY(), powa.getAlto(), powa.getAncho())) {
