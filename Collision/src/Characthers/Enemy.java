@@ -136,7 +136,7 @@ public class Enemy extends Thread {
 
     public void run() {
 
-        while (true) {
+        while (col) {
             int j = 5;
 
             try {
@@ -156,7 +156,8 @@ public class Enemy extends Thread {
                             Enemy.sleep(50);
 
                         }
-
+                        this.x=-1000;
+                        this.y=-1000;
                         col = false;
                     }
                     if (col) {

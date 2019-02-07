@@ -115,8 +115,10 @@ public class StevePower extends Thread {
             } catch (InterruptedException ex) {
                 Logger.getLogger(StevePower.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
         }
-
+            this.x=-1000;
+            this.y=-1000;
     }
 
 }
