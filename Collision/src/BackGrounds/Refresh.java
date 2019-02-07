@@ -24,7 +24,7 @@ public class Refresh extends Thread{
     BackGrounds bg;
     public Refresh(JPanel jpan,Enemy enemy,Steve steve,StevePower sp,BackGrounds bg)
     {
-        this.jpn=jpan;
+       this.jpn=jpan;
        this.enemy = enemy;
        this.steve=steve;
        this.sp=sp;
