@@ -108,14 +108,16 @@ public class StevePower extends Thread {
                         x = x + j * 10;
                         g.drawImage(imagen, x, y, null);
                         StevePower.sleep(50);
-
+                        
                         break;
                 }
-
+                
             } catch (InterruptedException ex) {
                 Logger.getLogger(StevePower.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        this.x=-1000;
+        this.y=-1000;
 
     }
 
