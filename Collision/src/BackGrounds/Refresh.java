@@ -35,7 +35,7 @@ public class Refresh extends Thread{
         while(true)
         { 
             
-             steve.DrawChar(steve.CoordX(), steve.CoordY(), steve.getActual());
+             
             try {
                 jpn.update(jpn.getGraphics());
                 Refresh.sleep(50);
