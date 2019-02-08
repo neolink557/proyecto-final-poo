@@ -137,7 +137,7 @@ public class Enemy extends Thread {
     public void run() {
 
         while (col) {
-            int j = 5;
+            int j = 10;
 
             try {
                 altoe = dkey.getHeight(null) - 50;

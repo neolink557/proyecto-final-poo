@@ -66,7 +66,7 @@ public class NewJFrame extends javax.swing.JFrame {
         enemy1.start();
         refresh = new Refresh(jPanel1, enemy, steve, powa, bg);//Inicia el hilo
         refresh.start();
-
+  
     }
 
     /**
@@ -131,7 +131,8 @@ public class NewJFrame extends javax.swing.JFrame {
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
         int x, y, j;
-
+        
+        
         x = steve.CoordX();
         y = steve.CoordY();
         j = 15;
