@@ -142,60 +142,51 @@ public class Enemy extends Thread {
             try {
                 altoe = dkey.getHeight(null) - 50;
                 anchoe = dkey.getWidth(null) - 50;
-                if (col == false) {
-                    this.g.drawImage(death[18], this.x, this.y, null);
-                }
-                else{
-                if (colision(this.x, this.y, this.altoe, this.anchoe, misteve.CoordX(), misteve.CoordY(), misteve.altos, misteve.anchos)) {
 
-                } else {
+                if (colision(this.x, this.y, this.altoe, this.anchoe, powa.getX(), powa.getY(), powa.getAlto(), powa.getAncho())) {
+                    for (int i = 1; i < 19; i++) {
+                        this.g.drawImage(death[i], this.x, this.y, null);
+                        Enemy.sleep(50);
 
-                    if (colision(this.x, this.y, this.altoe, this.anchoe, powa.getX(), powa.getY(), powa.getAlto(), powa.getAncho())) {
-                        for (int i = 1; i < 19; i++) {
-                            this.g.drawImage(death[i], this.x, this.y, null);
-                            Enemy.sleep(50);
-
-                        }
-                        this.x=-1000;
-                        this.y=-1000;
-                        col = false;
                     }
-                    if (col) {
+                    this.x = -1000;
+                    this.y = -1000;
+                    col = false;
+                }
+                if (col) {
 
-                        while (c <= 8) {
-                            c++;
-                        }
-                        while (c > 0) {
-                            c--;
-                        }
-                        if (this.x <= misteve.CoordX() && this.y <= misteve.CoordY()) {
-                            this.x += j;
-                            this.y += j;
-
-                            this.g.drawImage(dkey, this.x, this.y, null);
-                        }
-                        if (this.x >= misteve.CoordX() && this.y >= misteve.CoordY()) {
-                            this.x -= j;
-                            this.y -= j;
-                            this.g.drawImage(dkey, this.x, this.y, null);
-
-                        }
-                        if (this.x <= misteve.CoordX() && this.y >= misteve.CoordY()) {
-                            this.x += j;
-                            this.y -= j;
-                            this.g.drawImage(dkey, this.x, this.y, null);
-
-                        }
-                        if (this.x >= misteve.CoordX() && this.y <= misteve.CoordY()) {
-                            this.x -= j;
-                            this.y += j;
-                            this.g.drawImage(dkey, this.x, this.y, null);
-
-                        }
+                    while (c <= 8) {
+                        c++;
                     }
+                    while (c > 0) {
+                        c--;
+                    }
+                    if (this.x <= misteve.CoordX() && this.y <= misteve.CoordY()) {
+                        this.x += j;
+                        this.y += j;
 
+                        this.g.drawImage(dkey, this.x, this.y, null);
+                    }
+                    if (this.x >= misteve.CoordX() && this.y >= misteve.CoordY()) {
+                        this.x -= j;
+                        this.y -= j;
+                        this.g.drawImage(dkey, this.x, this.y, null);
+
+                    }
+                    if (this.x <= misteve.CoordX() && this.y >= misteve.CoordY()) {
+                        this.x += j;
+                        this.y -= j;
+                        this.g.drawImage(dkey, this.x, this.y, null);
+
+                    }
+                    if (this.x >= misteve.CoordX() && this.y <= misteve.CoordY()) {
+                        this.x -= j;
+                        this.y += j;
+                        this.g.drawImage(dkey, this.x, this.y, null);
+
+                    }
                 }
-                }
+
                 Enemy.sleep(50);
 
             } catch (InterruptedException ex) {
