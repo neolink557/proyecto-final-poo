@@ -5,8 +5,12 @@
  */
 package Characthers;
 
+import Powers.StevePower;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.geom.AffineTransform;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import org.w3c.dom.css.Rect;
@@ -18,11 +22,12 @@ import org.w3c.dom.css.Rect;
 public class Steve {
 
     int x, y;
-    int change;
+    int change = 0;
     int lastkey = 83;
     int anchos;
     int altos;
     Image actual;
+    StevePower powa;
 
     public Image getActual() {
         return actual;
@@ -112,22 +117,70 @@ public class Steve {
     public int getChange() {
         return change;
     }
-    JPanel MiJP;
 
-    public Steve(JPanel miJ) {
+    public Steve() {
         this.x = 0;
         this.y = 0;
-        this.MiJP = miJ;
     }
 
-    public void DrawChar(int xi, int yi, Image image) {
+    public void DrawChar(Image image, Graphics g) {
 
-        this.x = xi;
-        this.y = yi;
+        Graphics2D g2d = (Graphics2D) g;
+        int spriteHeight = skey[1].getHeight(null);
+        int spriteWidth = skey[1].getWidth(null);
+        AffineTransform affineTransform = new AffineTransform();
+        affineTransform.translate(x, y);
 
-        MiJP.getGraphics().drawImage(image, xi, yi, null);
+        g2d.drawImage(skey[change], affineTransform, null);
+
         altos = image.getHeight(null);
         anchos = image.getWidth(null);
+    }
+
+    public void update(int c) {
+        switch (c) {
+            case 65:
+                
+                this.x -= 20;
+                change++;
+                if (change == 8) {
+                    change = 0;
+                }
+                setLastkey(c);
+                break;
+            case 68:
+                this.x += 20;
+                change++;
+                if (change == 8) {
+                    change = 0;
+                }
+                setLastkey(c);
+                break;
+            case 83:
+                this.y += 20;
+                change++;
+                if (change == 8) {
+                    change = 0;
+                }
+                setLastkey(c);
+                break;
+            case 87:
+                this.y -= 20;
+                change++;
+                if (change == 8) {
+                    change = 0;
+                }
+                setLastkey(c);
+                break;
+        }
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public int getAnchos() {
@@ -154,22 +207,9 @@ public class Steve {
         return this.y;
     }
 
-    public boolean colision(int x1, int y1, int alto, int ancho, int x2, int y2, int alto2, int ancho2) {
-
-        if ((x2 >= x1 && x2 <= (x1 + ancho)) && (y2 >= y1 && y2 <= (y1 + alto))) {
-            return true;
-        }
-        if ((x2 + ancho >= x1 && x2 <= (x1 + ancho)) && (y2 + alto >= y1 && y2 <= (y1 + alto))) {
-            return true;
-        }
-        if ((x2 >= x1 && x2 <= (x1 + ancho)) && (y2 + alto >= y1 && y2 <= (y1 + alto))) {
-            return true;
-        }
-        if (((x2 + ancho2) >= x1 && (x2 + ancho2) <= x1 + ancho) && ((y2 + alto2) >= y1 && (y2 + alto2) < y1 + alto)) {
-            return true;
-        } else {
-            return false;
-        }
-
+    public Rectangle getRect() {
+        Rectangle rect = null;
+        rect = new Rectangle(x, y, skey[1].getWidth(null), skey[1].getHeight(null));
+        return rect;
     }
 }

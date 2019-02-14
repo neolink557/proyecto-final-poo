@@ -7,7 +7,10 @@ package Characthers;
 
 import Powers.StevePower;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.geom.AffineTransform;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -25,8 +28,6 @@ public class Enemy extends Thread {
 
     Steve misteve;
     StevePower powa;
-    JPanel miJP;
-    Graphics g;
     boolean col = true;
     int c = 1;
 
@@ -72,13 +73,11 @@ public class Enemy extends Thread {
         new ImageIcon(getClass().getResource("../resources/al lado/a9.png")).getImage()
     };
 
-    public Enemy(JPanel miJ, int xi, int yi, Steve misteve, StevePower powa) {
+    public Enemy(Steve steve) {
         super();
-        this.g = miJ.getGraphics();
-        this.x = xi;
-        this.y = yi;
-        this.misteve = misteve;
-        this.powa = powa;
+        this.misteve = steve;
+        this.x = 0;
+        this.y = 0;
     }
 
     public void setPowa(StevePower powa) {
@@ -93,13 +92,24 @@ public class Enemy extends Thread {
         this.col = col;
     }
 
-    public void DrawEnemy(Graphics g, int xi, int yi) {
+    public void DrawEnemy(Graphics g) {
 
-        this.x = xi;
-        this.y = yi;
+        Graphics2D g2d = (Graphics2D) g;
+        int spriteHeight = dkey.getHeight(null);
+        int spriteWidth = dkey.getWidth(null);
+        AffineTransform affineTransform = new AffineTransform();
+        affineTransform.translate(x, y);
+        g2d.drawImage(dkey, affineTransform, null);
 
-        g.drawImage(dkey, xi, yi, null);
+    }
 
+    public void DrawDeath(Graphics g, int i) {
+        Graphics2D g2d = (Graphics2D) g;
+        int spriteHeight = dkey.getHeight(null);
+        int spriteWidth = dkey.getWidth(null);
+        AffineTransform affineTransform = new AffineTransform();
+        affineTransform.translate(x, y);   
+            g2d.drawImage(death[i], affineTransform, null);
     }
 
     public int getX() {
@@ -134,84 +144,50 @@ public class Enemy extends Thread {
         this.altoe = altoe;
     }
 
-    public void run() {
+    public void perseguir() {
+        int j = 8;
 
-        while (col) {
-            int j = 10;
+        try {
+            altoe = dkey.getHeight(null) - 50;
+            anchoe = dkey.getWidth(null) - 50;
 
-            try {
-                altoe = dkey.getHeight(null) - 50;
-                anchoe = dkey.getWidth(null) - 50;
+            if (this.x <= misteve.CoordX() && this.y <= misteve.CoordY()) {
+                this.x += j;
+                this.y += j;
 
-                if (colision(this.x, this.y, this.altoe, this.anchoe, powa.getX(), powa.getY(), powa.getAlto(), powa.getAncho())) {
-                    for (int i = 1; i < 19; i++) {
-                        this.g.drawImage(death[i], this.x, this.y, null);
-                        Enemy.sleep(50);
-
-                    }
-                    this.x = -1000;
-                    this.y = -1000;
-                    col = false;
-                }
-                if (col) {
-
-                    while (c <= 8) {
-                        c++;
-                    }
-                    while (c > 0) {
-                        c--;
-                    }
-                    if (this.x <= misteve.CoordX() && this.y <= misteve.CoordY()) {
-                        this.x += j;
-                        this.y += j;
-
-                        this.g.drawImage(dkey, this.x, this.y, null);
-                    }
-                    if (this.x >= misteve.CoordX() && this.y >= misteve.CoordY()) {
-                        this.x -= j;
-                        this.y -= j;
-                        this.g.drawImage(dkey, this.x, this.y, null);
-
-                    }
-                    if (this.x <= misteve.CoordX() && this.y >= misteve.CoordY()) {
-                        this.x += j;
-                        this.y -= j;
-                        this.g.drawImage(dkey, this.x, this.y, null);
-
-                    }
-                    if (this.x >= misteve.CoordX() && this.y <= misteve.CoordY()) {
-                        this.x -= j;
-                        this.y += j;
-                        this.g.drawImage(dkey, this.x, this.y, null);
-
-                    }
-                }
-
-                Enemy.sleep(50);
-
-            } catch (InterruptedException ex) {
-                Logger.getLogger(StevePower.class.getName()).log(Level.SEVERE, null, ex);
             }
+            if (this.x >= misteve.CoordX() && this.y >= misteve.CoordY()) {
+                this.x -= j;
+                this.y -= j;
+
+            }
+            if (this.x <= misteve.CoordX() && this.y >= misteve.CoordY()) {
+                this.x += j;
+                this.y -= j;
+
+            }
+            if (this.x >= misteve.CoordX() && this.y <= misteve.CoordY()) {
+                this.x -= j;
+                this.y += j;
+
+            }
+
+            Enemy.sleep(50);
+
+        } catch (InterruptedException ex) {
+            Logger.getLogger(StevePower.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
-    public boolean colision(int x1, int y1, int alto, int ancho, int x2, int y2, int alto2, int ancho2) {
+    public void run() {
 
-        if ((x2 >= x1 && x2 <= (x1 + ancho)) && (y2 >= y1 && y2 <= (y1 + alto))) {
-            return true;
-        }
-        if ((x2 + ancho >= x1 && x2 <= (x1 + ancho)) && (y2 + alto >= y1 && y2 <= (y1 + alto))) {
-            return true;
-        }
-        if ((x2 >= x1 && x2 <= (x1 + ancho)) && (y2 + alto >= y1 && y2 <= (y1 + alto))) {
-            return true;
-        }
-        if (((x2 + ancho2) >= x1 && (x2 + ancho2) <= x1 + ancho) && ((y2 + alto2) >= y1 && (y2 + alto2) < y1 + alto)) {
-            return true;
-        } else {
-            return false;
-        }
+    }
 
+    public Rectangle getRect() {
+        Rectangle rect = null;
+        rect = new Rectangle(x, y, dkey.getWidth(null), dkey.getHeight(null));
+        return rect;
     }
 
 }

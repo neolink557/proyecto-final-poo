@@ -16,15 +16,15 @@ import javax.swing.JPanel;
  */
 public class BackGrounds {
 
-    JPanel MiJPB;
+    
     Image imagen = new ImageIcon(getClass().getResource("../resources/powers/bg.jpg")).getImage();
 
-    public BackGrounds(JPanel miJ) {
-        this.MiJPB = miJ;
+    public BackGrounds() {
+        
     }
 
-    public void DrawBack() {
-        MiJPB.getGraphics().drawImage(imagen, 0, 0, null);
+    public void DrawBack(Graphics g) {
+        g.drawImage(imagen, 0, 0, null);
     }
 
 }
