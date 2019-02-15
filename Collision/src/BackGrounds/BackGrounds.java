@@ -17,7 +17,8 @@ import javax.swing.JPanel;
 public class BackGrounds {
 
     
-    Image imagen = new ImageIcon(getClass().getResource("../resources/powers/bg.jpg")).getImage();
+    Image imagen = new ImageIcon(getClass().getResource("../resources/escenario/fondo.png")).getImage();
+
 
     public BackGrounds() {
         

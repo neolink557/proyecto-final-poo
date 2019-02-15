@@ -91,7 +91,7 @@ public class StevePower extends Thread {
                 this.y =y;
                 activated=true;
                 break;
-
+            
         }
     }
 
@@ -104,46 +104,7 @@ public class StevePower extends Thread {
     }
 
     public void run() {
-        x = x + 100;
-        y = y + 150;
-        for (int j = 0; j < 10; j++) {
 
-            try {
-
-                switch (key) {
-                    case 83:
-                        y = y + j * 10;
-                        g.drawImage(imagen, x, y, null);
-                        StevePower.sleep(50);
-
-                        break;
-                    case 87:
-                        y = y - j * 10;
-                        g.drawImage(imagen, x, y, null);
-                        StevePower.sleep(50);
-
-                        break;
-                    case 65:
-                        x = x - j * 10;
-                        g.drawImage(imagen, x, y, null);
-                        StevePower.sleep(50);
-
-                        break;
-                    case 68:
-                        x = x + j * 10;
-                        g.drawImage(imagen, x, y, null);
-                        StevePower.sleep(50);
-
-                        break;
-                }
-
-            } catch (InterruptedException ex) {
-                Logger.getLogger(StevePower.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
-        this.x = -1000;
-        this.y = -1000;
     }
 public Rectangle getRect() {
         Rectangle rect = null;

@@ -20,7 +20,7 @@ public class Principal extends javax.swing.JFrame {
     Enemy enemy;
     StevePower powa;
     int WIDTH = 1920;
-    int HEIGHT = 1080;
+    int HEIGHT = 1040;
 
     /**
      * Creates new form Principal
@@ -32,7 +32,7 @@ public class Principal extends javax.swing.JFrame {
         steve.setActual(steve.getSkey(1));//poner imagen (setactual - tecla oprimida)
         steve.setX(500);
         steve.setY(500);
-        powa = new StevePower(-2000,-2000);
+        powa = new StevePower(2000,2000);
         enemy = new Enemy(steve);
         lienzo  = new Lienzo(steve,enemy,powa);
         setLayout(null);

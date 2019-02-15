@@ -7,6 +7,9 @@ package BackGrounds;
 
 import Characthers.Enemy;
 import Characthers.Steve;
+import ObjetosEscenario.Cama;
+import ObjetosEscenario.Chimenea;
+import ObjetosEscenario.Mesa;
 import Powers.StevePower;
 import java.awt.Canvas;
 import java.awt.Graphics;
@@ -34,6 +37,11 @@ public class Lienzo extends JPanel implements KeyListener {
     BackGrounds bg;
     Timer timer;
     int col = 0;
+    Cama cama = new Cama();
+    Mesa mesa = new Mesa();
+    Chimenea chi = new Chimenea();
+    
+    boolean coli = false;
 
     public Lienzo(Steve steve, Enemy enemy, StevePower powa) {
         bg = new BackGrounds();
@@ -52,10 +60,12 @@ public class Lienzo extends JPanel implements KeyListener {
         miG = imgBuffer.getGraphics();
         bg.DrawBack(miG);
         sp.drawPowa(miG);
+        cama.DrawBack(miG);
+        mesa.DrawBack(miG);
         if (sp.isActivated()) {
             j++;
             int h = steve.i;
-            switch (h){
+            switch (h) {
                 case 0:
                     sp.setY(sp.getY() + 1 * (j * 30));
                     break;
@@ -69,13 +79,13 @@ public class Lienzo extends JPanel implements KeyListener {
                     sp.setX(sp.getX() - 1 * (j * 30));
                     break;
             }
-            
+
             sp.drawPowa(miG);
             if (j == 5) {
                 sp.setActivated(false);
                 j = 0;
-                sp.setX(-3000);
-                sp.setY(-3000);
+                sp.setX(3000);
+                sp.setY(3000);
             }
         }
         if (collision()) {
@@ -84,7 +94,7 @@ public class Lienzo extends JPanel implements KeyListener {
         if (col == 1) {
             i++;
             enemy.DrawDeath(miG, i);
-            System.out.println(i);
+
             if (i == 18) {
                 i = 0;
                 col = 2;
@@ -98,7 +108,15 @@ public class Lienzo extends JPanel implements KeyListener {
                 enemy.perseguir();
             }
         }
-        steve.DrawChar(steve.getActual(), miG);
+       if(Stevecollision())
+       {
+           steve.DrawChar(steve.getDeath(), miG);
+       }
+       else
+       {
+           steve.DrawChar(steve.getDeath(), miG);
+       }
+        
         g.drawImage(imgBuffer, 0, 0, this);
         //enemy.DrawEnemy(miG, enemy.getX(), enemy.getY());
     }
@@ -110,8 +128,10 @@ public class Lienzo extends JPanel implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
-        steve.update(e.getKeyCode());
+         coli = Stevecollision();
+        System.out.println(coli);
+        
+        steve.update(e.getKeyCode(), coli);
         sp.update(e.getKeyCode(), steve.CoordX(), steve.CoordY() + 100);
 
     }
@@ -127,10 +147,25 @@ public class Lienzo extends JPanel implements KeyListener {
         }
         if (enemy.getRect().intersects(steve.getRect())) {
             return true;
-        } else {
-            return false;
         }
-
+        return false;
+    }
+    public boolean Stevecollision() {
+ 
+        if (steve.getRect().intersects(cama.getRect())) {
+            return true;
+        }
+        if (steve.getRect().intersects(chi.getRect())) {
+            return true;
+        }
+        if (steve.getRect().intersects(mesa.getRect())) {
+            return true;
+        }
+         if (steve.getRect().intersects(enemy.getRect())) {
+            return true;
+        }
+        
+        return false;
     }
 
     private class Actualizador extends TimerTask {

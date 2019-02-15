@@ -20,16 +20,17 @@ import org.w3c.dom.css.Rect;
  * @author Braya
  */
 public class Steve {
-    
+
     public int i;
-    int x, y, j=0;
+    int x, y, j = 0;
     int change = 0;
     int lastkey = 83;
     int anchos;
     int altos;
+    int velocidad=20;
     Image actual;
     StevePower powa;
-    Image steve[][] = new Image [4][9];
+    Image steve[][] = new Image[5][9];
 
     public Image getActual() {
         return actual;
@@ -47,16 +48,17 @@ public class Steve {
     public void setDeath(Image death) {
         this.death = death;
     }
-    
-   public void llenarMatriz(){
-       for (  i = 0 ; i < 9 ; i++){
-           steve [0][i]= new ImageIcon(getClass().getResource("../resources/Adelante/s"+(i+1)+".png")).getImage();
-           steve [1][i]= new ImageIcon(getClass().getResource("../resources/atras/w"+(i+1)+".png")).getImage();
-           steve [2][i]= new ImageIcon(getClass().getResource("../resources/al otro lado v/a"+(i+1)+".png")).getImage();
-           steve [3][i]= new ImageIcon(getClass().getResource("../resources/al lado/a"+(i+1)+".png")).getImage();
-       }i=0;
-   }
 
+    public void llenarMatriz() {
+        for (i = 0; i < 9; i++) {
+            steve[0][i] = new ImageIcon(getClass().getResource("../resources/Adelante/s" + (i + 1) + ".png")).getImage();
+            steve[1][i] = new ImageIcon(getClass().getResource("../resources/atras/w" + (i + 1) + ".png")).getImage();
+            steve[2][i] = new ImageIcon(getClass().getResource("../resources/al otro lado v/a" + (i + 1) + ".png")).getImage();
+            steve[3][i] = new ImageIcon(getClass().getResource("../resources/al lado/a" + (i + 1) + ".png")).getImage();
+            steve[4][i] = new ImageIcon(getClass().getResource("../resources/death/death.png")).getImage();
+        }
+        i = 0;
+    }
 
     public Image getDkey(int x) {
         return steve[2][x];
@@ -69,7 +71,8 @@ public class Steve {
     public Image getWkey(int x) {
         return steve[1][x];
     }
-   public Image getSkey(int x) {
+
+    public Image getSkey(int x) {
         return steve[0][x];
     }
 
@@ -94,7 +97,7 @@ public class Steve {
         this.y = 0;
         llenarMatriz();
     }
-    
+
     public void DrawChar(Image image, Graphics g) {
 
         Graphics2D g2d = (Graphics2D) g;
@@ -109,41 +112,66 @@ public class Steve {
         anchos = image.getWidth(null);
     }
 
-    public void update(int c) {
+    public void update(int c,boolean coli) {
+        
         switch (c) {
+            
             case 65:
-                this.x -= 20;
-                i = 3;
                 j++;
+                
                 if (j == 8) {
                     j = 0;
+                }
+                if (this.x == 180 || coli == true) {
+                    this.x += velocidad*2;
+                    i=4;
+                } else {
+                    i = 3;
+                    this.x -= velocidad;
                 }
                 setLastkey(c);
                 break;
             case 68:
-                this.x += 20;
-                i = 2;
                 j++;
                 if (j == 8) {
                     j = 0;
                 }
+                if (this.x == 1600 || coli == true) {
+                    this.x -= velocidad*2;
+                    i=4;
+                } else {
+                    this.x += velocidad;
+                    i = 2;
+                }
                 setLastkey(c);
                 break;
             case 83:
-                this.y += 20;
                 i = 0;
                 j++;
                 if (j == 8) {
                     j = 0;
                 }
+                if (this.y == 760 || this.y == 780 || coli == true) {
+                    this.y -= velocidad*2;
+                    i=4;
+                } else {
+                    this.y += velocidad;
+                    i = 0;
+                }
                 setLastkey(c);
                 break;
             case 87:
-                this.y -= 20;
-                i = 1;
+                
                 j++;
                 if (j == 8) {
                     j = 0;
+                }
+                if (this.y == 0 || coli == true) {
+                        this.y += velocidad*2;
+                        i=4;
+                } else {
+                    this.y -=velocidad;
+                    i = 1;
                 }
                 setLastkey(c);
                 break;
