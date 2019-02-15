@@ -54,7 +54,22 @@ public class Lienzo extends JPanel implements KeyListener {
         sp.drawPowa(miG);
         if (sp.isActivated()) {
             j++;
-            sp.setX(sp.getX() - 1 * (j * 30));
+            int h = steve.i;
+            switch (h){
+                case 0:
+                    sp.setY(sp.getY() + 1 * (j * 30));
+                    break;
+                case 1:
+                    sp.setY(sp.getY() - 1 * (j * 30));
+                    break;
+                case 2:
+                    sp.setX(sp.getX() + 1 * (j * 30));
+                    break;
+                case 3:
+                    sp.setX(sp.getX() - 1 * (j * 30));
+                    break;
+            }
+            
             sp.drawPowa(miG);
             if (j == 5) {
                 sp.setActivated(false);

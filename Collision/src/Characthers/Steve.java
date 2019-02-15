@@ -20,14 +20,16 @@ import org.w3c.dom.css.Rect;
  * @author Braya
  */
 public class Steve {
-
-    int x, y;
+    
+    public int i;
+    int x, y, j=0;
     int change = 0;
     int lastkey = 83;
     int anchos;
     int altos;
     Image actual;
     StevePower powa;
+    Image steve[][] = new Image [4][9];
 
     public Image getActual() {
         return actual;
@@ -45,61 +47,30 @@ public class Steve {
     public void setDeath(Image death) {
         this.death = death;
     }
-    Image[] skey = {new ImageIcon(getClass().getResource("../resources/Adelante/s1.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Adelante/s2.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Adelante/s3.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Adelante/s4.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Adelante/s5.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Adelante/s6.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Adelante/s7.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Adelante/s8.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Adelante/s9.png")).getImage()
-    };
-    Image[] wkey = {new ImageIcon(getClass().getResource("../resources/atras/w1.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/atras/w2.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/atras/w3.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/atras/w4.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/atras/w5.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/atras/w6.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/atras/w7.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/atras/w8.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/atras/w9.png")).getImage()
-    };
-    Image[] dkey = {new ImageIcon(getClass().getResource("../resources/al otro lado v/a1.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/a2.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/a3.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/a4.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/a5.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/a6.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/a7.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/a8.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al otro lado v/a9.png")).getImage()
-    };
-    Image[] akey = {new ImageIcon(getClass().getResource("../resources/al lado/a1.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al lado/a2.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al lado/a3.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al lado/a4.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al lado/a5.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al lado/a6.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al lado/a7.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al lado/a8.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al lado/a9.png")).getImage()
-    };
+    
+   public void llenarMatriz(){
+       for (  i = 0 ; i < 9 ; i++){
+           steve [0][i]= new ImageIcon(getClass().getResource("../resources/Adelante/s"+(i+1)+".png")).getImage();
+           steve [1][i]= new ImageIcon(getClass().getResource("../resources/atras/w"+(i+1)+".png")).getImage();
+           steve [2][i]= new ImageIcon(getClass().getResource("../resources/al otro lado v/a"+(i+1)+".png")).getImage();
+           steve [3][i]= new ImageIcon(getClass().getResource("../resources/al lado/a"+(i+1)+".png")).getImage();
+       }i=0;
+   }
+
 
     public Image getDkey(int x) {
-        return dkey[x];
+        return steve[2][x];
     }
 
     public Image getAkey(int x) {
-        return akey[x];
-    }
-
-    public Image getSkey(int x) {
-        return skey[x];
+        return steve[3][x];
     }
 
     public Image getWkey(int x) {
-        return wkey[x];
+        return steve[1][x];
+    }
+   public Image getSkey(int x) {
+        return steve[0][x];
     }
 
     public int getLastkey() {
@@ -121,17 +92,18 @@ public class Steve {
     public Steve() {
         this.x = 0;
         this.y = 0;
+        llenarMatriz();
     }
-
+    
     public void DrawChar(Image image, Graphics g) {
 
         Graphics2D g2d = (Graphics2D) g;
-        int spriteHeight = skey[1].getHeight(null);
-        int spriteWidth = skey[1].getWidth(null);
+        int spriteHeight = steve[0][1].getHeight(null);
+        int spriteWidth = steve[0][1].getWidth(null);
         AffineTransform affineTransform = new AffineTransform();
         affineTransform.translate(x, y);
 
-        g2d.drawImage(skey[change], affineTransform, null);
+        g2d.drawImage(steve[i][j], affineTransform, null);
 
         altos = image.getHeight(null);
         anchos = image.getWidth(null);
@@ -140,35 +112,38 @@ public class Steve {
     public void update(int c) {
         switch (c) {
             case 65:
-                
                 this.x -= 20;
-                change++;
-                if (change == 8) {
-                    change = 0;
+                i = 3;
+                j++;
+                if (j == 8) {
+                    j = 0;
                 }
                 setLastkey(c);
                 break;
             case 68:
                 this.x += 20;
-                change++;
-                if (change == 8) {
-                    change = 0;
+                i = 2;
+                j++;
+                if (j == 8) {
+                    j = 0;
                 }
                 setLastkey(c);
                 break;
             case 83:
                 this.y += 20;
-                change++;
-                if (change == 8) {
-                    change = 0;
+                i = 0;
+                j++;
+                if (j == 8) {
+                    j = 0;
                 }
                 setLastkey(c);
                 break;
             case 87:
                 this.y -= 20;
-                change++;
-                if (change == 8) {
-                    change = 0;
+                i = 1;
+                j++;
+                if (j == 8) {
+                    j = 0;
                 }
                 setLastkey(c);
                 break;
@@ -209,7 +184,7 @@ public class Steve {
 
     public Rectangle getRect() {
         Rectangle rect = null;
-        rect = new Rectangle(x, y, skey[1].getWidth(null), skey[1].getHeight(null));
+        rect = new Rectangle(x, y, steve[0][1].getWidth(null), steve[0][1].getHeight(null));
         return rect;
     }
 }

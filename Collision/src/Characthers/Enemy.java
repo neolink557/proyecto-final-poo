@@ -22,62 +22,31 @@ import javax.swing.JPanel;
  */
 public class Enemy extends Thread {
 
-    int x, y, j;
+    int i,x, y, j;
     int anchoe;
     int altoe;
-
+    int c = 1;
+    boolean col = true;
+    Image death[] = new Image[19];
     Steve misteve;
     StevePower powa;
-    boolean col = true;
-    int c = 1;
-
-    Image[] death = {new ImageIcon(getClass().getResource("../resources/Enemies/death1.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Enemies/death2.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Enemies/death3.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Enemies/death4.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Enemies/death5.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Enemies/death6.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Enemies/death7.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Enemies/death8.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Enemies/death9.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Enemies/death10.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Enemies/death11.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Enemies/death12.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Enemies/death13.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Enemies/death14.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Enemies/death15.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Enemies/death16.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Enemies/death17.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Enemies/death18.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/Enemies/death19.png")).getImage()
-    };
-    Image[] wkey = {new ImageIcon(getClass().getResource("../resources/atras/w1.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/atras/w2.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/atras/w3.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/atras/w4.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/atras/w5.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/atras/w6.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/atras/w7.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/atras/w8.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/atras/w9.png")).getImage()
-    };
+    
+    
+    public void llenarMatriz_Enmy(){
+        for (i = 0; i < 19 ; i++){
+            death[i]=new ImageIcon(getClass().getResource("../resources/Enemies/death"+(i+1)+".png")).getImage();
+        }
+    }
     Image dkey = new ImageIcon(getClass().getResource("../resources/Enemies/s1.png")).getImage();
-    Image[] akey = {new ImageIcon(getClass().getResource("../resources/al lado/a1.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al lado/a2.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al lado/a3.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al lado/a4.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al lado/a5.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al lado/a6.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al lado/a7.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al lado/a8.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/al lado/a9.png")).getImage()
-    };
+    
+
 
     public Enemy(Steve steve) {
         super();
         this.misteve = steve;
         this.x = 0;
         this.y = 0;
+        llenarMatriz_Enmy();
     }
 
     public void setPowa(StevePower powa) {
