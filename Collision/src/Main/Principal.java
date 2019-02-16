@@ -30,11 +30,11 @@ public class Principal extends javax.swing.JFrame {
         
         steve = new Steve();
         steve.setActual(steve.getSkey(1));//poner imagen (setactual - tecla oprimida)
-        steve.setX(500);
-        steve.setY(500);
+        steve.setX(1000);
+        steve.setY(800);
         powa = new StevePower(2000,2000);
-        enemy = new Enemy(steve);
-        lienzo  = new Lienzo(steve,enemy,powa);
+        enemy = new Enemy();
+        lienzo  = new Lienzo(steve,powa);
         setLayout(null);
         add(lienzo);
         addKeyListener(lienzo);

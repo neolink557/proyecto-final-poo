@@ -123,7 +123,7 @@ public class Steve {
                     j = 0;
                 }
                 if (this.x == 180 || coli == true) {
-                    this.x += velocidad*2;
+
                     i=4;
                 } else {
                     i = 3;
@@ -137,7 +137,7 @@ public class Steve {
                     j = 0;
                 }
                 if (this.x == 1600 || coli == true) {
-                    this.x -= velocidad*2;
+
                     i=4;
                 } else {
                     this.x += velocidad;
@@ -152,7 +152,7 @@ public class Steve {
                     j = 0;
                 }
                 if (this.y == 760 || this.y == 780 || coli == true) {
-                    this.y -= velocidad*2;
+
                     i=4;
                 } else {
                     this.y += velocidad;
@@ -167,7 +167,7 @@ public class Steve {
                     j = 0;
                 }
                 if (this.y == 0 || coli == true) {
-                        this.y += velocidad*2;
+
                         i=4;
                 } else {
                     this.y -=velocidad;

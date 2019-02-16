@@ -11,6 +11,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -22,14 +23,21 @@ import javax.swing.JPanel;
  */
 public class Enemy extends Thread {
 
-    int i,x, y, j;
+    int i,x, y, j,k;
+
+    public int getK() {
+        return k;
+    }
+
+    public void setK(int k) {
+        this.k = k;
+    }
     int anchoe;
     int altoe;
     int c = 1;
-    boolean col = true;
+    int col = 0;
     Image death[] = new Image[19];
-    Steve misteve;
-    StevePower powa;
+    
     
     
     public void llenarMatriz_Enmy(){
@@ -41,23 +49,29 @@ public class Enemy extends Thread {
     
 
 
-    public Enemy(Steve steve) {
+    public Enemy() {
         super();
-        this.misteve = steve;
-        this.x = 0;
-        this.y = 0;
+        Random r = new Random();
+        this.x = r.nextInt(1000);
+        this.y = r.nextInt(650);
         llenarMatriz_Enmy();
     }
 
-    public void setPowa(StevePower powa) {
-        this.powa = powa;
-    }
+    
 
-    public boolean isCol() {
+    public int isCol() {
         return col;
     }
 
-    public void setCol(boolean col) {
+    public int getI() {
+        return i;
+    }
+
+    public void setI(int i) {
+        this.i = i;
+    }
+
+    public void setCol(int col) {
         this.col = col;
     }
 
@@ -69,6 +83,7 @@ public class Enemy extends Thread {
         AffineTransform affineTransform = new AffineTransform();
         affineTransform.translate(x, y);
         g2d.drawImage(dkey, affineTransform, null);
+       
 
     }
 
@@ -79,6 +94,7 @@ public class Enemy extends Thread {
         AffineTransform affineTransform = new AffineTransform();
         affineTransform.translate(x, y);   
             g2d.drawImage(death[i], affineTransform, null);
+            
     }
 
     public int getX() {
@@ -113,10 +129,10 @@ public class Enemy extends Thread {
         this.altoe = altoe;
     }
 
-    public void perseguir() {
-        int j = 8;
+    public void perseguir(Steve misteve) {
+        int j = 2;
 
-        try {
+        
             altoe = dkey.getHeight(null) - 50;
             anchoe = dkey.getWidth(null) - 50;
 
@@ -141,11 +157,9 @@ public class Enemy extends Thread {
 
             }
 
-            Enemy.sleep(50);
+           
 
-        } catch (InterruptedException ex) {
-            Logger.getLogger(StevePower.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      
 
     }
 

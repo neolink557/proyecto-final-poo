@@ -17,6 +17,8 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JPanel;
@@ -30,7 +32,7 @@ public class Lienzo extends JPanel implements KeyListener {
     int i, j;
     Steve steve;
     StevePower sp;
-    Enemy enemy;
+    ArrayList<Enemy> enemigos;
     Graphics miG;
     Graphics g;
     Image imgBuffer;
@@ -40,14 +42,17 @@ public class Lienzo extends JPanel implements KeyListener {
     Cama cama = new Cama();
     Mesa mesa = new Mesa();
     Chimenea chi = new Chimenea();
-    
     boolean coli = false;
 
-    public Lienzo(Steve steve, Enemy enemy, StevePower powa) {
+    public Lienzo(Steve steve, StevePower powa) {
         bg = new BackGrounds();
         this.steve = steve;
-        this.enemy = enemy;
         this.sp = powa;
+        enemigos = new ArrayList<Enemy>();
+
+        for (int a = 0; a < 5; a++) {
+            enemigos.add(new Enemy());
+        }
         //this.enemy=enemy;
         timer = new Timer();
         setBounds(0, 0, 1920, 1080);
@@ -57,11 +62,20 @@ public class Lienzo extends JPanel implements KeyListener {
 
     public void paint(Graphics g) {
         this.g = g;
+
         miG = imgBuffer.getGraphics();
-        bg.DrawBack(miG);
+        
+        if(steve.getRect().intersects(bg.getRect()))
+        {
+           bg.DrawBack(miG,1); 
+        }
+        else{
+            bg.DrawBack(miG,0);
+        }
         sp.drawPowa(miG);
         cama.DrawBack(miG);
         mesa.DrawBack(miG);
+
         if (sp.isActivated()) {
             j++;
             int h = steve.i;
@@ -88,37 +102,43 @@ public class Lienzo extends JPanel implements KeyListener {
                 sp.setY(3000);
             }
         }
-        if (collision()) {
-            col = 1;
-        }
-        if (col == 1) {
-            i++;
-            enemy.DrawDeath(miG, i);
 
-            if (i == 18) {
-                i = 0;
-                col = 2;
-                enemy.setX(-2000);
-                enemy.setY(-2000);
-            }
+        Iterator<Enemy> it = enemigos.iterator();
 
-        } else {
-            if (col == 0) {
-                enemy.DrawEnemy(miG);
-                enemy.perseguir();
+        while (it.hasNext()) {
+            Enemy r = it.next();
+
+            if (r.getRect().intersects(sp.getRect())) {
+                r.setCol(1);
+            }
+            if(r.isCol()==1){
+                r.setK(r.getK()+1);
+                r.DrawDeath(miG, r.getK());
+                if (r.getK() == 18) {
+                    r.setX(-500);
+                    r.setY(-500);
+                    r.setCol(2);
+                    r.setK(0);
+                    break;
+                }
+
+                
+            } else if (r.isCol() == 0) {
+                r.DrawEnemy(miG);
+                r.perseguir(steve);
             }
         }
-       if(Stevecollision())
-       {
-           steve.DrawChar(steve.getDeath(), miG);
-       }
-       else
-       {
-           steve.DrawChar(steve.getDeath(), miG);
-       }
+
         
+        if (Stevecollision()) {
+            steve.DrawChar(steve.getDeath(), miG);
+        } else {
+            
+            steve.DrawChar(steve.getDeath(), miG);
+        }
+
         g.drawImage(imgBuffer, 0, 0, this);
-        //enemy.DrawEnemy(miG, enemy.getX(), enemy.getY());
+
     }
 
     @Override
@@ -128,9 +148,8 @@ public class Lienzo extends JPanel implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-         coli = Stevecollision();
-        System.out.println(coli);
-        
+        coli = Stevecollision();
+
         steve.update(e.getKeyCode(), coli);
         sp.update(e.getKeyCode(), steve.CoordX(), steve.CoordY() + 100);
 
@@ -141,30 +160,24 @@ public class Lienzo extends JPanel implements KeyListener {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean collision() {
-        if (enemy.getRect().intersects(sp.getRect())) {
-            return true;
-        }
-        if (enemy.getRect().intersects(steve.getRect())) {
-            return true;
-        }
-        return false;
-    }
     public boolean Stevecollision() {
- 
+
         if (steve.getRect().intersects(cama.getRect())) {
-            return true;
-        }
-        if (steve.getRect().intersects(chi.getRect())) {
             return true;
         }
         if (steve.getRect().intersects(mesa.getRect())) {
             return true;
         }
-         if (steve.getRect().intersects(enemy.getRect())) {
-            return true;
+        Iterator<Enemy> it = enemigos.iterator();
+
+        while (it.hasNext()) {
+            Enemy r = it.next();
+            r.perseguir(steve);
+            if (r.getRect().intersects(steve.getRect())) {
+                return true;
+            }
         }
-        
+
         return false;
     }
 
@@ -172,8 +185,15 @@ public class Lienzo extends JPanel implements KeyListener {
 
         @Override
         public void run() {
-            repaint();
 
+            Iterator<Enemy> it = enemigos.iterator();
+
+            while (it.hasNext()) {
+                Enemy r = it.next();
+                
+
+            }
+            repaint();
         }
 
     }

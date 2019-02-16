@@ -15,15 +15,18 @@ import javax.swing.ImageIcon;
  * @author Braya
  */
 public class Mesa {
+
     Image imagen = new ImageIcon(getClass().getResource("../resources/escenario/mesa.png")).getImage();
-    
-     public void DrawBack(Graphics g) {
+
+    public void DrawBack(Graphics g) {
         g.drawImage(imagen, 1380, 150, null);
+
     }
-     
-     public Rectangle getRect() {
+
+    public Rectangle getRect() {
         Rectangle rect = null;
-        rect = new Rectangle(1380, 150, imagen.getWidth(null), imagen.getHeight(null));
+        rect = new Rectangle(1450, 100, imagen.getWidth(null) - 50, imagen.getHeight(null) - 50);
+
         return rect;
     }
 }
