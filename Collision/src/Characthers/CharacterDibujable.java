@@ -5,10 +5,12 @@
  */
 package Characthers;
 
+import java.awt.Graphics;
+
 /**
  *
  * @author Usuario
  */
-public class Prueba_Enmyrandom {
-    
+public interface CharacterDibujable {
+    public void DrawBack(Graphics g);
 }

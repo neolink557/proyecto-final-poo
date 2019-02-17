@@ -15,12 +15,13 @@ import Powers.StevePower;
  * @author estudiantes
  */
 public class Principal extends javax.swing.JFrame {
+    
     Steve steve;
     Lienzo lienzo;
     Enemy enemy;
     StevePower powa;
-    int WIDTH = 1920;
-    int HEIGHT = 1040;
+    private int WIDTH = 1920;
+    private int HEIGHT = 1040;
 
     /**
      * Creates new form Principal
@@ -33,6 +34,7 @@ public class Principal extends javax.swing.JFrame {
         steve.setX(1000);
         steve.setY(800);
         powa = new StevePower(2000,2000);
+        powa.llenar();
         enemy = new Enemy();
         lienzo  = new Lienzo(steve,powa);
         setLayout(null);
