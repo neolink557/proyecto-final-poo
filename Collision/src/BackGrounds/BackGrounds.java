@@ -12,7 +12,7 @@ public class BackGrounds{
     
     private Image imagen[] = {new ImageIcon(getClass().getResource("../resources/escenario/fondo.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/escenario/fon3.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/powers/bg.jpg")).getImage()};
+        new ImageIcon(getClass().getResource("../resources/escenario/fonn.png")).getImage()};
     
 
     public BackGrounds() {

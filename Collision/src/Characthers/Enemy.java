@@ -13,7 +13,7 @@ import javax.swing.ImageIcon;
 
 public class Enemy extends Thread implements CharacterColisionable, CharacterDibujable {
 
-    private int i,x, y, j,k;
+    private int i,x, y, velocidad=2,k;
     private int anchoe;
     private int altoe;
     private int c = 1;
@@ -76,35 +76,36 @@ public class Enemy extends Thread implements CharacterColisionable, CharacterDib
 
     @Override
     public void update(int c, int coli) {
-        int j = 2;
+        
 
             altoe = dkey.getHeight(null) - 50;
             anchoe = dkey.getWidth(null) - 50;
-            
+           
             if (this.x <= misteve.CoordX() && this.y <= misteve.CoordY()) {
-                this.x += j;
-                this.y += j;
-                lastkey=65;
+                this.x += velocidad;
+                this.y += velocidad;
+                lastkey=68;
 
             }
             if (this.x >= misteve.CoordX() && this.y >= misteve.CoordY()) {
-                this.x -= j;
-                this.y -= j;
-                lastkey=83;
+                this.x -= velocidad;
+                this.y -= velocidad;
+                lastkey=87;
 
             }
             if (this.x <= misteve.CoordX() && this.y >= misteve.CoordY()) {
-                this.x += j;
-                this.y -= j;
+                this.x += velocidad;
+                this.y -= velocidad;
                 lastkey=83;
 
             }
             if (this.x >= misteve.CoordX() && this.y <= misteve.CoordY()) {
-                this.x -= j;
-                this.y += j;
+                this.x -= velocidad;
+                this.y += velocidad;
                 lastkey=65;
 
             }
+            
             
     }
     
@@ -171,6 +172,14 @@ public class Enemy extends Thread implements CharacterColisionable, CharacterDib
 
     public void setLastkey(int lastkey) {
         this.lastkey = lastkey;
+    }
+
+    public int getVelocidad() {
+        return velocidad;
+    }
+
+    public void setVelocidad(int velocidad) {
+        this.velocidad = velocidad;
     }
     
 }

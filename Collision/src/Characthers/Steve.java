@@ -111,7 +111,7 @@ public class Steve implements CharacterColisionable {
                 if (j == 8) {
                     j = 0;
                 }
-                if (this.y == 0 || coli == 4) {
+                if (this.y <= 0 || coli == 4) {
 
                 } else {
                     this.y -=velocidad;
