@@ -1,4 +1,3 @@
-
 package Characthers;
 
 import Powers.StevePower;
@@ -9,7 +8,6 @@ import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import javax.swing.ImageIcon;
 
-
 public class Steve implements CharacterColisionable {
 
     private int i;
@@ -19,9 +17,10 @@ public class Steve implements CharacterColisionable {
     private int anchos;
     private int altos;
     private int col;
-    private int velocidad=20;
-    private Image steve[][] = new Image[6][9];
+    private int velocidad = 30;
+    private Image steve[][] = new Image[10][9];
     private Image actual;
+    private int vida = 3;
     private Image death = new ImageIcon(getClass().getResource("../resources/death/death.png")).getImage();
 
     public Steve() {
@@ -29,7 +28,7 @@ public class Steve implements CharacterColisionable {
         this.y = 0;
         llenarMatriz();
     }
-    
+
     public void llenarMatriz() {
         for (i = 0; i < 9; i++) {
             steve[0][i] = new ImageIcon(getClass().getResource("../resources/Adelante/s" + (i + 1) + ".png")).getImage();
@@ -37,7 +36,11 @@ public class Steve implements CharacterColisionable {
             steve[2][i] = new ImageIcon(getClass().getResource("../resources/al otro lado v/a" + (i + 1) + ".png")).getImage();
             steve[3][i] = new ImageIcon(getClass().getResource("../resources/al lado/a" + (i + 1) + ".png")).getImage();
             steve[4][i] = new ImageIcon(getClass().getResource("../resources/death/death.png")).getImage();
-            steve[5][i]= new ImageIcon(getClass().getResource("../resources/Adelante/s10.png")).getImage();
+            steve[5][i] = new ImageIcon(getClass().getResource("../resources/daño/d" + (i + 1) + ".png")).getImage();
+            steve[6][i] = new ImageIcon(getClass().getResource("../resources/hits/c" + (i + 1) + ".png")).getImage();
+            steve[7][i] = new ImageIcon(getClass().getResource("../resources/hitw/c" + (i + 1) + ".png")).getImage();
+            steve[8][i] = new ImageIcon(getClass().getResource("../resources/hitd/c" + (i + 1) + ".png")).getImage();
+            steve[9][i] = new ImageIcon(getClass().getResource("../resources/hita/c" + (i + 1) + ".png")).getImage();
         }
         i = 0;
     }
@@ -54,89 +57,108 @@ public class Steve implements CharacterColisionable {
 
         altos = image.getHeight(null);
         anchos = image.getWidth(null);
+        if (col == 3) {
+
+                i = 5;
+                switch (lastkey) {
+                    case 65:
+                        j = 2;
+                        break;
+                    case 68:
+                        j = 3;
+                        break;
+                    case 83:
+                        j = 4;
+                        break;
+                    case 87:
+                        j = 1;
+                        break;
+                }
+                vida--;
+                col=0;
+                
+            } 
     }
-    
-   
+
     @Override
-    public void update(int c,int coli) {
-        if(coli ==  3)
-        {
-            i=4;
-            j=4;
-        }else{
-        switch (c) {
+    public void update(int c, int coli) {
+        if (vida <= 0) {
+            i = 4;
+            j = 4;
+
+        } else {
             
-            case 65:
-                j++;
-                if (j == 8) {
-                    j = 0;
-                }
-                if (this.x == 180 || coli == 4) {
+                switch (c) {
 
-                } else {
-                    i = 3;
-                    this.x -= velocidad;
-                }
-                setLastkey(c);
-                break;
-            case 68:
-                j++;
-                if (j == 8) {
-                    j = 0;
-                }
-                if (this.x == 1600 || coli == 4) {
+                    case 65:
+                        j++;
+                        if (j == 8) {
+                            j = 0;
+                        }
+                        if (this.x == 180 || coli == 4) {
 
-                } else {
-                    this.x += velocidad;
-                    i = 2;
-                }
-                setLastkey(c);
-                break;
-            case 83:
-                i = 0;
-                j++;
-                if (j == 8) {
-                    j = 0;
-                }
-                if (this.y == 760 || this.y == 780 || coli == 4) {
+                        } else {
+                            i = 3;
+                            this.x -= velocidad;
+                        }
+                        setLastkey(c);
+                        break;
+                    case 68:
+                        j++;
+                        if (j == 8) {
+                            j = 0;
+                        }
+                        if (this.x == 1600 || coli == 4) {
 
-                } else {
-                    this.y += velocidad;
-                    i = 0;
-                }
-                setLastkey(c);
-                break;
-            case 87:
-                j++;
-                if (j == 8) {
-                    j = 0;
-                }
-                if (this.y <= 0 || coli == 4) {
+                        } else {
+                            this.x += velocidad;
+                            i = 2;
+                        }
+                        setLastkey(c);
+                        break;
+                    case 83:
+                        i = 0;
+                        j++;
+                        if (j == 8) {
+                            j = 0;
+                        }
+                        if (this.y == 760 || this.y == 780 || coli == 4) {
 
-                } else {
-                    this.y -=velocidad;
-                    i = 1;
-                }
-                setLastkey(c);
-                break;
-            case 81:
-                      i=5;
-                setLastkey(c);
-                break;
+                        } else {
+                            this.y += velocidad;
+                            i = 0;
+                        }
+                        setLastkey(c);
+                        break;
+                    case 87:
+                        j++;
+                        if (j == 8) {
+                            j = 0;
+                        }
+                        if (this.y <= 0 || coli == 4) {
+
+                        } else {
+                            this.y -= velocidad;
+                            i = 1;
+                        }
+                        setLastkey(c);
+                        break;
+                    case 69:
+                        
+                    break;
+                
+            }
         }
-        }        
     }
-    
+
     @Override
     public Rectangle getRect() {
         Rectangle rect = null;
-        rect = new Rectangle(x, y, steve[0][1].getWidth(null)-20, steve[0][1].getHeight(null));
+        rect = new Rectangle(x, y, steve[0][1].getWidth(null) - 20, steve[0][1].getHeight(null));
         return rect;
     }
-    
-    
+
     //METODOS SETTERS AND GETTERS
-    
     public Image getDkey(int x) {
         return steve[2][x];
     }
@@ -156,11 +178,11 @@ public class Steve implements CharacterColisionable {
     public void setLastkey(int lastkey) {
         this.lastkey = lastkey;
     }
-    
+
     public int getLastkey() {
         return lastkey;
     }
-    
+
     public void setChange(int change) {
         this.change = change;
     }
@@ -168,7 +190,7 @@ public class Steve implements CharacterColisionable {
     public int getChange() {
         return change;
     }
-    
+
     public void setX(int x) {
         this.x = x;
     }
@@ -176,19 +198,19 @@ public class Steve implements CharacterColisionable {
     public void setY(int y) {
         this.y = y;
     }
-    
+
     public void setAnchos(int anchos) {
         this.anchos = anchos;
     }
-    
+
     public int getAnchos() {
         return anchos;
     }
-    
+
     public void setAltos(int altos) {
         this.altos = altos;
     }
-    
+
     public int getAltos() {
         return altos;
     }
@@ -200,19 +222,19 @@ public class Steve implements CharacterColisionable {
     public int CoordY() {
         return this.y;
     }
-    
+
     public void setActual(Image setactual) {
         this.actual = setactual;
     }
-    
+
     public Image getActual() {
         return actual;
     }
-   
+
     public void setDeath(Image death) {
         this.death = death;
     }
-    
+
     public Image getDeath() {
         return death;
     }
@@ -233,10 +255,24 @@ public class Steve implements CharacterColisionable {
         return steve[i][j];
     }
 
-   
-    
-    
-    
+    public int getVida() {
+        return vida;
+    }
+
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
+    public int getJ() {
+        return j;
+    }
+
+    public void setJ(int j) {
+        this.j = j;
+    }
+    public void setI(int j) {
+        this.i = j;
+    }
 
     //NO REALIZA NINGUNCA FUNCION EN ESTA CLASE
     @Override

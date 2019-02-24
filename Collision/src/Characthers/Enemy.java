@@ -13,22 +13,27 @@ import javax.swing.ImageIcon;
 
 public class Enemy extends Thread implements CharacterColisionable, CharacterDibujable {
 
-    private int i,x, y, velocidad=2,k;
+    private int i,x, y, velocidad=5,k;
     private int anchoe;
     private int altoe;
     private int c = 1;
+    private int v;
     private int col = 0;
-    private Image death[] = new Image[19];
-    private Image dkey = new ImageIcon(getClass().getResource("../resources/Enemies/s1.png")).getImage();
+    private final Image death[] = new Image[19];
+    private final Image dkey = new ImageIcon(getClass().getResource("../resources/Enemies/s1.png")).getImage();
     Steve misteve;
+    private int vida=5;
     private int lastkey;
     
     
     public Enemy() {
         super();
         Random r = new Random();
+
         this.x = 180+r.nextInt(1400);
-        this.y = r.nextInt(760);
+        this.y = r.nextInt(500);
+        
+      
         llenarMatriz_Enmy();
     }
     
@@ -181,5 +186,22 @@ public class Enemy extends Thread implements CharacterColisionable, CharacterDib
     public void setVelocidad(int velocidad) {
         this.velocidad = velocidad;
     }
+
+    public int getVida() {
+        return vida;
+    }
+
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
+    public int getC() {
+        return c;
+    }
+
+    public void setC(int c) {
+        this.c = c;
+    }
+    
     
 }

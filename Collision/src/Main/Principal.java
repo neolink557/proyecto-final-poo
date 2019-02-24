@@ -9,6 +9,8 @@ import BackGrounds.Lienzo;
 import Characthers.Enemy;
 import Characthers.Steve;
 import Powers.StevePower;
+import Sounds.BackSound;
+import java.applet.AudioClip;
 
 /**
  *
@@ -22,7 +24,7 @@ public class Principal extends javax.swing.JFrame {
     StevePower powa;
     private int WIDTH = 1920;
     private int HEIGHT = 1040;
-
+    
     /**
      * Creates new form Principal
      */
@@ -39,9 +41,12 @@ public class Principal extends javax.swing.JFrame {
         lienzo  = new Lienzo(steve,powa);
         setLayout(null);
         add(lienzo);
+        addMouseListener(lienzo);
+        addMouseMotionListener(lienzo);
         addKeyListener(lienzo);
         pack();
         setBounds(0, 0, WIDTH, HEIGHT);
+       
     }
 
     /**
@@ -99,6 +104,7 @@ public class Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new Principal().setVisible(true);
             }
         });

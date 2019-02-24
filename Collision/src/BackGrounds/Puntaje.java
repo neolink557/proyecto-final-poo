@@ -38,7 +38,7 @@ public class Puntaje implements CharacterColisionable, CharacterDibujable{
     public void DrawBack(Graphics g) {
         g.setFont(new Font("Helvetica", Font.PLAIN, 59));
         g.setColor(Color.red);
-        g.drawString(data, 100, 50);
+        g.drawString(data, 100, 70);
         
         
     }

@@ -1,4 +1,3 @@
-
 package Powers;
 
 import Characthers.CharacterColisionable;
@@ -10,31 +9,30 @@ import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import javax.swing.ImageIcon;
 
-
 public class StevePower extends Thread implements CharacterDibujable, CharacterColisionable {
 
-    private int x, y,i;
+    private int x, y, i;
     private Graphics g;
     private int ancho, alto;
     private Image imagen = new ImageIcon(getClass().getResource("../resources/powers/Stevepower.png")).getImage();
-    private Image imagen2[]= new Image[6];
-    private boolean activated=false;
-    private boolean activated2=false;
-    
+    private Image imagen2[] = new Image[6];
+    private boolean activated = false;
+    private boolean activated2 = false;
+
     public StevePower(int xi, int yi) {
         this.x = xi;
         this.y = yi;
-        
+
     }
-    public void llenar()
-    {
+
+    public void llenar() {
         for (i = 0; i < 6; i++) {
-            imagen2[i] =new ImageIcon(getClass().getResource("../resources/powers/q"+(i+1)+".png")).getImage();
+            imagen2[i] = new ImageIcon(getClass().getResource("../resources/powers/q" + (i + 1) + ".png")).getImage();
         }
     }
+
     @Override
-    public void DrawBack(Graphics g)
-    {
+    public void DrawBack(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         int spriteHeight = imagen.getHeight(null);
         int spriteWidth = imagen.getWidth(null);
@@ -46,9 +44,8 @@ public class StevePower extends Thread implements CharacterDibujable, CharacterC
         alto = imagen.getHeight(null);
         ancho = imagen.getWidth(null);
     }
-    
-    public void DrawBack2(Graphics g,int i)
-    {
+
+    public void DrawBack2(Graphics g, int i) {
         Graphics2D g2d = (Graphics2D) g;
         int spriteHeight = imagen.getHeight(null);
         int spriteWidth = imagen.getWidth(null);
@@ -60,28 +57,20 @@ public class StevePower extends Thread implements CharacterDibujable, CharacterC
         alto = imagen.getHeight(null);
         ancho = imagen.getWidth(null);
     }
+
     @Override//COMO HACERLE PARA SEGUIR USANDO POLIMORFISMO.....
     public void update(int c, int i) {
-        
-    }
-    
-    public void perseguir(int c,int x,int y) {
-        switch (c) {
-            case 69:
-                this.x = x;
-                this.y = y;
-                activated=true;
-                break;
-            case 81:
-                this.x = x-170;
-                this.y = y-200;
-                activated2=true;
-                break;
-  
-        }
+
     }
 
-  
+    public void perseguir(int c, int x, int y) {
+
+        this.x = x;
+        this.y = y;
+        activated = true;
+
+    }
+
     @Override
     public Rectangle getRect() {
         Rectangle rect = null;
@@ -92,8 +81,8 @@ public class StevePower extends Thread implements CharacterDibujable, CharacterC
     //METODOS SETTERS Y GETTERS 
     public void setX(int x) {
         this.x = x;
-    }   
-    
+    }
+
     public int getX() {
         return x;
     }
@@ -109,11 +98,11 @@ public class StevePower extends Thread implements CharacterDibujable, CharacterC
     public void setAncho(int ancho) {
         this.ancho = ancho;
     }
-    
+
     public int getAncho() {
         return ancho;
     }
-    
+
     public void setAlto(int alto) {
         this.alto = alto;
     }
@@ -121,7 +110,7 @@ public class StevePower extends Thread implements CharacterDibujable, CharacterC
     public int getAlto() {
         return alto;
     }
-   
+
     public void setActivated(boolean activated) {
         this.activated = activated;
     }
@@ -129,15 +118,6 @@ public class StevePower extends Thread implements CharacterDibujable, CharacterC
     public boolean isActivated() {
         return activated;
     }
-
-    public boolean isActivated2() {
-        return activated2;
-    }
-
-    public void setActivated2(boolean activated2) {
-        this.activated2 = activated2;
-    }
-
 
     //NO CUMPLE NINGUNA FUNCION EN ESTA CLASE
     @Override
