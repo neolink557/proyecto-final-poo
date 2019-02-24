@@ -27,6 +27,7 @@ import Sounds.Open;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import javax.swing.JOptionPane;
 
 public class Lienzo extends JPanel implements MouseListener,MouseMotionListener,KeyListener {
 
@@ -279,6 +280,15 @@ public class Lienzo extends JPanel implements MouseListener,MouseMotionListener,
     public void keyPressed(KeyEvent e) {
        
         steve.update(e.getKeyCode(), steve.getCol());
+        if(e.getKeyCode() == 27)
+        {
+            int option =JOptionPane.showConfirmDialog(null, "menu", "warning",JOptionPane.YES_NO_OPTION);
+            
+            if(option==JOptionPane.YES_OPTION)
+            {
+                System.exit(0);
+            }
+        }
 
         
     }

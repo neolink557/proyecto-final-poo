@@ -1,6 +1,7 @@
 package Characthers;
 
 import Powers.StevePower;
+import Sounds.Grito;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -22,6 +23,7 @@ public class Steve implements CharacterColisionable {
     private Image actual;
     private int vida = 3;
     private Image death = new ImageIcon(getClass().getResource("../resources/death/death.png")).getImage();
+    private Grito grito = new Grito();
 
     public Steve() {
         this.x = 0;
@@ -144,6 +146,7 @@ public class Steve implements CharacterColisionable {
                         setLastkey(c);
                         break;
                     case 69:
+                        grito.run();
                         
                     break;
                 
