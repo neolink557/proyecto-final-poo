@@ -38,7 +38,7 @@ public class Steve implements CharacterColisionable {
             steve[2][i] = new ImageIcon(getClass().getResource("../resources/al otro lado v/a" + (i + 1) + ".png")).getImage();
             steve[3][i] = new ImageIcon(getClass().getResource("../resources/al lado/a" + (i + 1) + ".png")).getImage();
             steve[4][i] = new ImageIcon(getClass().getResource("../resources/death/death.png")).getImage();
-            steve[5][i] = new ImageIcon(getClass().getResource("../resources/daño/d" + (i + 1) + ".png")).getImage();
+            steve[5][i] = new ImageIcon(getClass().getResource("../resources/dano/d" + (i + 1) + ".png")).getImage();
             steve[6][i] = new ImageIcon(getClass().getResource("../resources/hits/c" + (i + 1) + ".png")).getImage();
             steve[7][i] = new ImageIcon(getClass().getResource("../resources/hitw/c" + (i + 1) + ".png")).getImage();
             steve[8][i] = new ImageIcon(getClass().getResource("../resources/hitd/c" + (i + 1) + ".png")).getImage();
