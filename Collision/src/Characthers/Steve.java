@@ -24,6 +24,7 @@ public class Steve implements CharacterColisionable {
     private int vida = 3;
     private Image death = new ImageIcon(getClass().getResource("../resources/death/death.png")).getImage();
     private Grito grito = new Grito();
+    boolean win =false;
 
     public Steve() {
         this.x = 0;
@@ -84,11 +85,15 @@ public class Steve implements CharacterColisionable {
 
     @Override
     public void update(int c, int coli) {
-        if (vida <= 0) {
+        if (vida <= 0 ) {
             i = 4;
             j = 4;
 
-        } else {
+        }else if(win == true) {
+             i = 0;
+            j = 1;
+        }
+        else {
             
                 switch (c) {
 
@@ -275,6 +280,14 @@ public class Steve implements CharacterColisionable {
     }
     public void setI(int j) {
         this.i = j;
+    }
+
+    public boolean isWin() {
+        return win;
+    }
+
+    public void setWin(boolean win) {
+        this.win = win;
     }
 
     //NO REALIZA NINGUNCA FUNCION EN ESTA CLASE

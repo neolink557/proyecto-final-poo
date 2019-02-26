@@ -9,7 +9,8 @@ public class BackGrounds {
 
     private Image imagen[] = {new ImageIcon(getClass().getResource("../resources/escenario/fondo.png")).getImage(),
         new ImageIcon(getClass().getResource("../resources/escenario/fon3.png")).getImage(),
-        new ImageIcon(getClass().getResource("../resources/escenario/fonn.png")).getImage()};
+         new ImageIcon(getClass().getResource("../resources/escenario/fonn.png")).getImage(),
+        new ImageIcon(getClass().getResource("../resources/escenario/fon4.png")).getImage()};
 
     public BackGrounds() {
     }
