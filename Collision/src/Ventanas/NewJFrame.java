@@ -16,6 +16,7 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     public NewJFrame() {
         initComponents();
+        setTitle("Steve Hunt");
     }
 
     /**

@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
  * @author Braya
  */
 public class Menu extends javax.swing.JFrame {
+    
     Lienzo2 lienzo;
     On on = new On();
     Click click = new Click();
@@ -24,7 +25,8 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
-      
+        setTitle("Steve Hunt/Menu");
+        
         lienzo = new Lienzo2();
         add(lienzo);
     }

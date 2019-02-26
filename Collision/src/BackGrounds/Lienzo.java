@@ -82,7 +82,7 @@ public class Lienzo extends JPanel implements MouseListener,MouseMotionListener,
         vida.update(i, i);
         enemigos = new ArrayList<Enemy>();
         fondo.start();
-
+        
         for (int a = 0; a < numeroenemigos; a++) {
             totalmuertes++;
             enemigos.add(new Enemy());

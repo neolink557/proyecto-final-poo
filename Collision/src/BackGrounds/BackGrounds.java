@@ -17,12 +17,12 @@ public class BackGrounds {
 
     public void DrawBack(Graphics g, int i) {
         g.drawImage(imagen[i], 0, 0, null);
-
+        g.fillRect(950, 100, 50, 50);
     }
 
     public Rectangle getRect() {
         Rectangle rect = null;
-        rect = new Rectangle(950, 10, 50, 100);
+        rect = new Rectangle(950, 50, 50, 100);
         return rect;
     }
 

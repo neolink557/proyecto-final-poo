@@ -11,6 +11,7 @@ import Characthers.Steve;
 import Powers.StevePower;
 import Sounds.BackSound;
 import java.applet.AudioClip;
+import java.awt.Cursor;
 
 /**
  *
@@ -30,7 +31,9 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        
+        Cursor cursor = new Cursor(1);
+        setCursor(cursor);
+        setTitle("Steve Hunt");
         steve = new Steve();
         steve.setActual(steve.getSkey(1));//poner imagen (setactual - tecla oprimida)
         steve.setX(1000);
