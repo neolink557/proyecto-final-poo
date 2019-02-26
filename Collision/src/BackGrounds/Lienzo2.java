@@ -16,11 +16,13 @@ import javax.swing.JPanel;
  *
  * @author Braya
  */
-public class Lienzo2 extends JPanel {
+public class Lienzo2 extends JPanel implements Resolucion {
      JButton b1;
         Image imagen = new ImageIcon(getClass().getResource("../resources/menu/menu.png")).getImage();
+        
     public Lienzo2() {      
-        setBounds(0, 0, 1920, 1080);
+        imagen= imagen.getScaledInstance(ancho, alto, FRAMEBITS);
+        setBounds(0, 0, ancho, alto);
     }
     
     @Override

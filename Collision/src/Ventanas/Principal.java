@@ -6,6 +6,7 @@
 package Ventanas;
 
 import BackGrounds.Lienzo;
+import BackGrounds.Resolucion;
 import Characthers.Enemy;
 import Characthers.Steve;
 import Powers.StevePower;
@@ -17,14 +18,14 @@ import java.awt.Cursor;
  *
  * @author estudiantes
  */
-public class Principal extends javax.swing.JFrame {
+public class Principal extends javax.swing.JFrame implements Resolucion {
     
     Steve steve;
     Lienzo lienzo;
     Enemy enemy;
     StevePower powa;
-    private int WIDTH = 1920;
-    private int HEIGHT = 1040;
+    private int WIDTH = ancho;
+    private int HEIGHT = alto+(alto/15);
     
     /**
      * Creates new form Principal
@@ -37,7 +38,7 @@ public class Principal extends javax.swing.JFrame {
         steve = new Steve();
         steve.setActual(steve.getSkey(1));//poner imagen (setactual - tecla oprimida)
         steve.setX(1000);
-        steve.setY(800);
+        steve.setY(700);
         powa = new StevePower(2000,2000);
         powa.llenar();
         enemy = new Enemy();

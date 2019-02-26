@@ -1,6 +1,7 @@
 
 package Characthers;
 
+import BackGrounds.Resolucion;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -11,9 +12,9 @@ import javax.swing.ImageIcon;
 
 
 
-public class Enemy extends Thread implements CharacterColisionable, CharacterDibujable {
+public class Enemy extends Thread implements CharacterColisionable, CharacterDibujable , Resolucion{
 
-    private int i,x, y, velocidad=5,k;
+    private int i,x, y, velocidad=((ancho)*5)/(1920),k;
     private int anchoe;
     private int altoe;
     private int c = 1;
@@ -31,7 +32,7 @@ public class Enemy extends Thread implements CharacterColisionable, CharacterDib
         Random r = new Random();
 
         this.x = 180+r.nextInt(1400);
-        this.y = r.nextInt(500);
+        this.y = r.nextInt(400);
         
       
         llenarMatriz_Enmy();

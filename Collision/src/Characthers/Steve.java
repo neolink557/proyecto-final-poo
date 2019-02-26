@@ -1,5 +1,6 @@
 package Characthers;
 
+import BackGrounds.Resolucion;
 import Powers.StevePower;
 import Sounds.Grito;
 import java.awt.Graphics;
@@ -7,9 +8,10 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
+import java.awt.image.ImageObserver;
 import javax.swing.ImageIcon;
 
-public class Steve implements CharacterColisionable {
+public class Steve implements CharacterColisionable, Resolucion{
 
     private int i;
     private int x, y, j = 0;
@@ -18,7 +20,7 @@ public class Steve implements CharacterColisionable {
     private int anchos;
     private int altos;
     private int col;
-    private int velocidad = 30;
+    private int velocidad = ((ancho)*30)/(1920);
     private Image steve[][] = new Image[10][9];
     private Image actual;
     private int vida = 3;
@@ -45,6 +47,7 @@ public class Steve implements CharacterColisionable {
             steve[8][i] = new ImageIcon(getClass().getResource("../resources/hitd/c" + (i + 1) + ".png")).getImage();
             steve[9][i] = new ImageIcon(getClass().getResource("../resources/hita/c" + (i + 1) + ".png")).getImage();
         }
+      
         i = 0;
     }
 

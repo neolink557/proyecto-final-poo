@@ -34,7 +34,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import javax.swing.JOptionPane;
 
-public class Lienzo extends JPanel implements MouseListener,MouseMotionListener,KeyListener {
+public class Lienzo extends JPanel implements MouseListener,MouseMotionListener,KeyListener,Resolucion {
 
     private int i, j, h, k, m;
     private int muertes;
@@ -75,7 +75,7 @@ public class Lienzo extends JPanel implements MouseListener,MouseMotionListener,
     private final WinTittle wint = new WinTittle();
 
     
-    public Lienzo(Steve steve, StevePower powa) {
+    public Lienzo(Steve steve, StevePower powa)  {
         bg = new BackGrounds();
         this.steve = steve;
         this.sp = powa;
@@ -89,7 +89,7 @@ public class Lienzo extends JPanel implements MouseListener,MouseMotionListener,
         }
 
         timer = new Timer();
-        setBounds(0, 0, 1920, 1080);
+        setBounds(0, 0, ancho, alto);
         imgBuffer = new BufferedImage(1920, 1080, BufferedImage.OPAQUE);
         timer.schedule(new Actualizador(), 0, 100);
     }
@@ -149,7 +149,7 @@ public class Lienzo extends JPanel implements MouseListener,MouseMotionListener,
                     while (it.hasNext()) {
                         Enemy r = it.next();
                         r.setVida(2);
-                        r.setVelocidad(7);
+                        r.setVelocidad(((ancho)*7)/(1920));
                     }
                 }
                 generated = false;
@@ -326,7 +326,8 @@ public class Lienzo extends JPanel implements MouseListener,MouseMotionListener,
         if(steve.isWin() == true){
                 wint.DrawBack(miG);
             }
-        g.drawImage(imgBuffer, 0, 0, this);
+        Image tmp = imgBuffer.getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
+        g.drawImage(tmp, 0, 0, this);
 
     }
 
