@@ -254,7 +254,7 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
             }
 
             sp.DrawBack(miG);
-            if (j == 10) {
+            if (j == 5) {
                 sp.setActivated(false);
                 j = 0;
                 sp.setX(3000);
@@ -334,10 +334,13 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
     public void keyPressed(KeyEvent e) {
         
         steve.update(e.getKeyCode(), steve.getCol());
-        if (e.getKeyCode() == 27) {
-            int option = JOptionPane.showConfirmDialog(null, "menu", "warning", JOptionPane.YES_NO_OPTION);
 
-            if (option == JOptionPane.YES_OPTION) {
+        if(e.getKeyCode() == 27)
+        {
+            int option =JOptionPane.showConfirmDialog(null, "Seguro desea salir?", "warning",JOptionPane.YES_NO_OPTION);
+            
+            if(option==JOptionPane.YES_OPTION)
+            {
                 System.exit(0);
             }
         }
