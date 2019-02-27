@@ -352,7 +352,7 @@ public class Lienzo extends JPanel implements MouseListener,MouseMotionListener,
         steve.update(e.getKeyCode(), steve.getCol());
         if(e.getKeyCode() == 27)
         {
-            int option =JOptionPane.showConfirmDialog(null, "menu", "warning",JOptionPane.YES_NO_OPTION);
+            int option =JOptionPane.showConfirmDialog(null, "Seguro desea salir?", "warning",JOptionPane.YES_NO_OPTION);
             
             if(option==JOptionPane.YES_OPTION)
             {
