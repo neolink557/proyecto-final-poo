@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
 
 public class StevePower extends Thread implements CharacterDibujable, CharacterColisionable {
 
-    private int x, y, i;
+    private int x, y, i, x1, y1;
     private Graphics g;
     private int ancho, alto;
     private Image imagen = new ImageIcon(getClass().getResource("../resources/powers/Stevepower.png")).getImage();
@@ -45,28 +45,43 @@ public class StevePower extends Thread implements CharacterDibujable, CharacterC
         ancho = imagen.getWidth(null);
     }
 
-    public void DrawBack2(Graphics g, int i) {
-        Graphics2D g2d = (Graphics2D) g;
-        int spriteHeight = imagen.getHeight(null);
-        int spriteWidth = imagen.getWidth(null);
-        AffineTransform affineTransform = new AffineTransform();
-        affineTransform.translate(x, y);
-
-        g2d.drawImage(imagen2[i], affineTransform, null);
-
-        alto = imagen.getHeight(null);
-        ancho = imagen.getWidth(null);
-    }
-
     @Override//COMO HACERLE PARA SEGUIR USANDO POLIMORFISMO.....
     public void update(int c, int i) {
 
     }
 
-    public void perseguir(int c, int x, int y) {
+    public void perseguir() {
 
-        this.x = x;
-        this.y = y;
+        if (this.x <= x1 ) {
+            if (x == x1) {
+
+            }else {
+                this.x += 50;
+            }
+        }
+         if (this.x > x1 ) {
+            if (x == x1) {
+
+            }else {
+                this.x -= 50;
+            }
+        }
+        if (this.y <= y1 ) {
+            if (y == y1) {
+
+            }else {
+                this.y += 50;
+            }
+        }
+         if (this.y > y1 ) {
+            if (y == y1) {
+
+            }else {
+                this.y -= 50;
+            }
+        } else {
+            activated = false;
+        }
         activated = true;
 
     }
@@ -117,6 +132,22 @@ public class StevePower extends Thread implements CharacterDibujable, CharacterC
 
     public boolean isActivated() {
         return activated;
+    }
+
+    public int getX1() {
+        return x1;
+    }
+
+    public void setX1(int x1) {
+        this.x1 = x1;
+    }
+
+    public int getY1() {
+        return y1;
+    }
+
+    public void setY1(int y1) {
+        this.y1 = y1;
     }
 
     //NO CUMPLE NINGUNA FUNCION EN ESTA CLASE

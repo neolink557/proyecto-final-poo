@@ -14,7 +14,7 @@ import javax.swing.ImageIcon;
 
 public class Enemy extends Thread implements CharacterColisionable, CharacterDibujable , Resolucion{
 
-    private int i,x, y, velocidad=((ancho)*5)/(1920),k;
+    private int i,x, y, velocidad=300, vel=(ancho/velocidad),k;
     private int anchoe;
     private int altoe;
     private int c = 1;
@@ -88,26 +88,26 @@ public class Enemy extends Thread implements CharacterColisionable, CharacterDib
             anchoe = dkey.getWidth(null) - 50;
            
             if (this.x <= misteve.CoordX() && this.y <= misteve.CoordY()) {
-                this.x += velocidad;
-                this.y += velocidad;
+                this.x += vel;
+                this.y += vel;
                 lastkey=68;
 
             }
             if (this.x >= misteve.CoordX() && this.y >= misteve.CoordY()) {
-                this.x -= velocidad;
-                this.y -= velocidad;
+                this.x -= vel;
+                this.y -= vel;
                 lastkey=87;
 
             }
             if (this.x <= misteve.CoordX() && this.y >= misteve.CoordY()) {
-                this.x += velocidad;
-                this.y -= velocidad;
+                this.x += vel;
+                this.y -= vel;
                 lastkey=83;
 
             }
             if (this.x >= misteve.CoordX() && this.y <= misteve.CoordY()) {
-                this.x -= velocidad;
-                this.y += velocidad;
+                this.x -= vel;
+                this.y += vel;
                 lastkey=65;
 
             }
