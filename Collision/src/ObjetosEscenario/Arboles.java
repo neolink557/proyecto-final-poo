@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ObjetosEscenario;
 
 import Characthers.CharacterColisionable;
@@ -12,32 +7,28 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author Braya
- */
-public class Arboles implements CharacterColisionable, CharacterDibujable{
+public class Arboles implements CharacterColisionable, CharacterDibujable {
 
-     Image imagen = new ImageIcon(getClass().getResource("../resources/escenario/arbol.png")).getImage();
-     private int x;
-     private int y;
-     private int alto=imagen.getHeight(null)-200;
-     private int ancho=imagen.getWidth(null)-200;
-     
+    private Image imagen = new ImageIcon(getClass().getResource("../resources/escenario/arbol.png")).getImage();
+    private int x;
+    private int y;
+    private int alto = imagen.getHeight(null) - 200;
+    private int ancho = imagen.getWidth(null) - 200;
 
     @Override
     public Rectangle getRect() {
         Rectangle rect = null;
-        rect = new Rectangle(x+100, y+75, ancho, alto );
-
+        rect = new Rectangle(x + 100, y + 75, ancho, alto);
         return rect;
     }
 
     @Override
     public void DrawBack(Graphics g) {
-        g.drawImage(imagen, x,y, null);
+        g.drawImage(imagen, x, y, null);
     }
-        public int getX() {
+
+    //METODOS SETTERS AND GETTERS
+    public int getX() {
         return x;
     }
 
@@ -68,9 +59,9 @@ public class Arboles implements CharacterColisionable, CharacterDibujable{
     public void setAncho(int ancho) {
         this.ancho = ancho;
     }
-    
-    
-        @Override
+
+    //SON OBTENIDOS DE LAS INFERFACES (POLIMORFISMO) - NO CUMPLEN FUNCION EN ESTA CLASE
+    @Override
     public void update(int c, int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -80,5 +71,4 @@ public class Arboles implements CharacterColisionable, CharacterDibujable{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
 }

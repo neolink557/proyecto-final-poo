@@ -6,29 +6,21 @@
 package Ventanas;
 
 import BackGrounds.Lienzo2;
-import Sounds.Click;
-import Sounds.On;
+import Sounds.Sonidos;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author Braya
- */
 public class Menu extends javax.swing.JFrame {
-    
-    Lienzo2 lienzo;
-    On on = new On();
-    Click click = new Click();
-            /**
-     * Creates new form Menu
-     */
+
+    private Lienzo2 lienzo;
+    private Sonidos clip = new Sonidos();
+
     public Menu() {
         initComponents();
-        setTitle("Steve Hunt/Menu");
-        
-        lienzo = new Lienzo2();
-        add(lienzo);
+        setTitle("Steve Hunt/Menu"); //Poniendo titulo a menu
+        lienzo = new Lienzo2(); // Llama lienzo
+        add(lienzo); // agregando a JPanel
     }
 
     /**
@@ -139,36 +131,35 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        new Principal().setVisible(true);
-        this.setVisible(false);
-        click.run();
+        new Principal().setVisible(true);//Inicia juego
+        this.setVisible(false);//Oculta menu
+        clip.run(0);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        this.dispose();
-        click.run();
+        this.dispose();//boton de salir pantalla
+        clip.run(0);
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
-        on.run();
-        Icon defaultIcon= new ImageIcon(getClass().getResource("../resources/menu/inicion.png"));
+        clip.run(7);
+        Icon defaultIcon = new ImageIcon(getClass().getResource("../resources/menu/inicion.png"));
         jButton1.setIcon(defaultIcon);
     }//GEN-LAST:event_jButton1MouseEntered
 
     private void jButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseEntered
-    
-        on.run();
-        Icon defaultIcon= new ImageIcon(getClass().getResource("../resources/menu/saliron.png"));
+        clip.run(7);
+        Icon defaultIcon = new ImageIcon(getClass().getResource("../resources/menu/saliron.png"));
         jButton2.setIcon(defaultIcon);
     }//GEN-LAST:event_jButton2MouseEntered
 
     private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
-        Icon defaultIcon= new ImageIcon(getClass().getResource("../resources/menu/inicio.png"));
+        Icon defaultIcon = new ImageIcon(getClass().getResource("../resources/menu/inicio.png"));
         jButton1.setIcon(defaultIcon);
     }//GEN-LAST:event_jButton1MouseExited
 
     private void jButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseExited
-        Icon defaultIcon= new ImageIcon(getClass().getResource("../resources/menu/salir.png"));
+        Icon defaultIcon = new ImageIcon(getClass().getResource("../resources/menu/salir.png"));
         jButton2.setIcon(defaultIcon);
     }//GEN-LAST:event_jButton2MouseExited
 

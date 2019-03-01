@@ -15,82 +15,65 @@ public class StevePower extends Thread implements CharacterDibujable, CharacterC
     private Graphics g;
     private int ancho, alto;
     private Image imagen = new ImageIcon(getClass().getResource("../resources/powers/Stevepower.png")).getImage();
-    private Image imagen2[] = new Image[6];
     private boolean activated = false;
     private boolean activated2 = false;
 
-    public StevePower(int xi, int yi) {
+    public StevePower(int xi, int yi) {//la posicion de steve en ese momento
         this.x = xi;
         this.y = yi;
-
-    }
-
-    public void llenar() {
-        for (i = 0; i < 6; i++) {
-            imagen2[i] = new ImageIcon(getClass().getResource("../resources/powers/q" + (i + 1) + ".png")).getImage();
-        }
     }
 
     @Override
     public void DrawBack(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        int spriteHeight = imagen.getHeight(null);
-        int spriteWidth = imagen.getWidth(null);
         AffineTransform affineTransform = new AffineTransform();
         affineTransform.translate(x, y);
-
         g2d.drawImage(imagen, affineTransform, null);
-
         alto = imagen.getHeight(null);
         ancho = imagen.getWidth(null);
     }
 
-    @Override//COMO HACERLE PARA SEGUIR USANDO POLIMORFISMO.....
-    public void update(int c, int i) {
-
+    @Override
+    public Rectangle getRect() {//hitbox poder
+        Rectangle rect = null;
+        rect = new Rectangle(x, y, imagen.getWidth(null), imagen.getHeight(null));
+        return rect;
     }
 
-    public void perseguir() {
+    public void perseguir() {//x1 y1 coordenadas del mouse se iguala a posicion del poder - poder llega a coordenada del mouse
 
-        if (this.x <= x1 ) {
+        if (this.x - x1 < 0) {
             if (x == x1) {
 
-            }else {
-                this.x += 50;
+            } else {
+                this.x += 70;
             }
         }
-         if (this.x > x1 ) {
+        if (this.x - x1 > 0) {
             if (x == x1) {
 
-            }else {
-                this.x -= 50;
+            } else {
+                this.x -= 70;
             }
         }
-        if (this.y <= y1 ) {
+        if (this.y - y1 < 0) {
             if (y == y1) {
 
-            }else {
-                this.y += 50;
+            } else {
+                this.y += 70;
             }
         }
-         if (this.y > y1 ) {
+        if (this.y - y1 > 0) {
             if (y == y1) {
 
-            }else {
-                this.y -= 50;
+            } else {
+                this.y -= 70;
             }
         } else {
             activated = false;
         }
         activated = true;
 
-    }
-
-    @Override
-    public Rectangle getRect() {
-        Rectangle rect = null;
-        rect = new Rectangle(x, y, imagen.getWidth(null), imagen.getHeight(null));
-        return rect;
     }
 
     //METODOS SETTERS Y GETTERS 
@@ -150,9 +133,13 @@ public class StevePower extends Thread implements CharacterDibujable, CharacterC
         this.y1 = y1;
     }
 
-    //NO CUMPLE NINGUNA FUNCION EN ESTA CLASE
+    //SON OBTENIDOS DE LAS INFERFACES (POLIMORFISMO) - NO CUMPLEN FUNCION EN ESTA CLASE
     @Override
     public void DrawDeath(Graphics g, int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void update(int c, int i) {
     }
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Ventanas;
 
 import BackGrounds.Lienzo;
@@ -10,39 +5,31 @@ import BackGrounds.Resolucion;
 import Characthers.Enemy;
 import Characthers.Steve;
 import Powers.StevePower;
-import Sounds.BackSound;
-import java.applet.AudioClip;
 import java.awt.Cursor;
 
-/**
- *
- * @author estudiantes
- */
 public class Principal extends javax.swing.JFrame implements Resolucion {
-    
-    Steve steve;
-    Lienzo lienzo;
-    Enemy enemy;
-    StevePower powa;
+
+    private Steve steve;
+    private Lienzo lienzo;
+    private Enemy enemy;
+    private StevePower powa;
     private int WIDTH = ancho;
-    private int HEIGHT = alto+(alto/15);
-    
+    private int HEIGHT = alto;
+
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
-        Cursor cursor = new Cursor(1);
-        setCursor(cursor);
+        Cursor cursor = new Cursor(2);//Pone imagen al cursor
         setTitle("Steve Hunt");
         steve = new Steve();
-        steve.setActual(steve.getSkey(1));//poner imagen (setactual - tecla oprimida)
+        steve.setActual(steve.getSkey(1));//poner imagen (setactual - tecla oprimida) y se setea una imagen donde mira
         steve.setX(1000);
         steve.setY(700);
-        powa = new StevePower(2000,2000);
-        powa.llenar();
+        powa = new StevePower(2000, 2000);//coordenadas x y y
         enemy = new Enemy();
-        lienzo  = new Lienzo(steve,powa);
+        lienzo = new Lienzo(steve, powa);
         setLayout(null);
         add(lienzo);
         addMouseListener(lienzo);
@@ -50,7 +37,6 @@ public class Principal extends javax.swing.JFrame implements Resolucion {
         addKeyListener(lienzo);
         pack();
         setBounds(0, 0, WIDTH, HEIGHT);
-       
     }
 
     /**
@@ -77,8 +63,6 @@ public class Principal extends javax.swing.JFrame implements Resolucion {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

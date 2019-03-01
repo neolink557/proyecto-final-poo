@@ -1,32 +1,29 @@
 package Characthers;
 
 import BackGrounds.Resolucion;
-import Powers.StevePower;
-import Sounds.Grito;
+import Sounds.Sonidos;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
-import java.awt.image.ImageObserver;
 import javax.swing.ImageIcon;
 
-public class Steve implements CharacterColisionable, Resolucion{
+public class Steve implements CharacterColisionable, Resolucion {
 
     private int i;
     private int x, y, j = 0;
     private int change = 0;
-    private int lastkey = 83;
-    private int anchos;
-    private int altos;
-    private int col;
-    private int velocidad = ((ancho)*30)/(1920);
-    private Image steve[][] = new Image[10][9];
-    private Image actual;
+    private int lastkey = 83; // guarda ultima tecla oprimida
+    private int anchos; //hitbox personaje
+    private int altos; // hitbox personaje
+    private int col;//colisiones
+    private int velocidad = ((ancho) * 30) / (1920);//regla de tres para mover en pantalla
+    private Image steve[][] = new Image[10][9];//matriz iamgenes steve
+    private Image actual; //saber la imagen donde mira
     private int vida = 3;
-    private Image death = new ImageIcon(getClass().getResource("../resources/death/death.png")).getImage();
-    private Grito grito = new Grito();
-    boolean win =false;
+    private Sonidos clip = new Sonidos();
+    boolean win = false;
 
     public Steve() {
         this.x = 0;
@@ -47,123 +44,121 @@ public class Steve implements CharacterColisionable, Resolucion{
             steve[8][i] = new ImageIcon(getClass().getResource("../resources/hitd/c" + (i + 1) + ".png")).getImage();
             steve[9][i] = new ImageIcon(getClass().getResource("../resources/hita/c" + (i + 1) + ".png")).getImage();
         }
-      
+
         i = 0;
     }
 
     public void DrawChar(Image image, Graphics g) {
 
-        Graphics2D g2d = (Graphics2D) g;
-        int spriteHeight = steve[0][1].getHeight(null);
-        int spriteWidth = steve[0][1].getWidth(null);
+        Graphics2D g2d = (Graphics2D) g;//crear grafico 2d
         AffineTransform affineTransform = new AffineTransform();
         affineTransform.translate(x, y);
 
-        g2d.drawImage(steve[i][j], affineTransform, null);
+        g2d.drawImage(steve[i][j], affineTransform, null);//dibuja a steve
 
         altos = image.getHeight(null);
         anchos = image.getWidth(null);
-        if (col == 3) {
 
-                i = 5;
-                switch (lastkey) {
-                    case 65:
-                        j = 2;
-                        break;
-                    case 68:
-                        j = 3;
-                        break;
-                    case 83:
-                        j = 4;
-                        break;
-                    case 87:
-                        j = 1;
-                        break;
-                }
-                vida--;
-                col=0;
-                
-            } 
+        if (col == 3) {//en lienzo se epescifica cada colision
+
+            i = 5;
+            switch (lastkey) {
+                case 65:
+                    j = 2;//pone imagen de colision o muerte basados en posicion
+                    break;
+                case 68:
+                    j = 3;
+                    break;
+                case 83:
+                    j = 4;
+                    break;
+                case 87:
+                    j = 1;
+                    break;
+            }
+            vida--;
+            col = 0;
+
+        }
     }
 
     @Override
     public void update(int c, int coli) {
-        if (vida <= 0 ) {
+        if (vida <= 0) {//si no tiene vida muere, los enemigos lo empujan
             i = 4;
             j = 4;
 
-        }else if(win == true) {
-             i = 0;
+        } else if (win == true) {//si gana queda mirando al frente,no se mueve
+            i = 0;
             j = 1;
-        }
-        else {
-            
-                switch (c) {
+        } else {
 
-                    case 65:
-                        j++;
-                        if (j == 8) {
-                            j = 0;
-                        }
-                        if (this.x == 180 || coli == 4) {
+            switch (c) {//si no ha matado ni ganado se sigue moviendo las imagenes
 
-                        } else {
-                            i = 3;
-                            this.x -= velocidad;
-                        }
-                        setLastkey(c);
-                        break;
-                    case 68:
-                        j++;
-                        if (j == 8) {
-                            j = 0;
-                        }
-                        if (this.x == 1600 || coli == 4) {
+                case 65:
+                    j++;
+                    if (j == 8) {
+                        j = 0;
+                    }
+                    if (this.x == 180 || coli == 4) {
 
-                        } else {
-                            this.x += velocidad;
-                            i = 2;
-                        }
-                        setLastkey(c);
-                        break;
-                    case 83:
-                        i = 0;
-                        j++;
-                        if (j == 8) {
-                            j = 0;
-                        }
-                        if (this.y == 760 || this.y == 780 || coli == 4) {
-
-                        } else {
-                            this.y += velocidad;
-                            i = 0;
-                        }
-                        setLastkey(c);
-                        break;
-                    case 87:
-                        j++;
-                        if (j == 8) {
-                            j = 0;
-                        }
-                        if (this.y <= 0 || coli == 4) {
-
-                        } else {
-                            this.y -= velocidad;
-                            i = 1;
-                        }
-                        setLastkey(c);
-                        break;
-                    case 69:
-                        grito.run();
-                        
+                    } else {
+                        i = 3;
+                        this.x -= velocidad;
+                    }
+                    setLastkey(c);
                     break;
-                
+                case 68:
+                    j++;
+                    if (j == 8) {
+                        j = 0;
+                    }
+                    if (this.x == 1600 || coli == 4) {
+
+                    } else {
+                        this.x += velocidad;
+                        i = 2;
+                    }
+                    setLastkey(c);
+                    break;
+                case 83:
+                    i = 0;
+                    j++;
+                    if (j == 8) {
+                        j = 0;
+                    }
+                    if (this.y == 760 || this.y == 780 || coli == 4) {
+
+                    } else {
+                        this.y += velocidad;
+                        i = 0;
+                    }
+                    setLastkey(c);
+                    break;
+                case 87:
+                    j++;
+                    if (j == 8) {
+                        j = 0;
+                    }
+                    if (this.y <= 0 || coli == 4) {
+
+                    } else {
+                        this.y -= velocidad;
+                        i = 1;
+                    }
+                    setLastkey(c);
+                    break;
+                case 69:
+                    clip.run(3);
+
+                    break;
+
             }
         }
     }
 
     @Override
-    public Rectangle getRect() {
+    public Rectangle getRect() {//crea hitbox
         Rectangle rect = null;
         rect = new Rectangle(x, y, steve[0][1].getWidth(null) - 20, steve[0][1].getHeight(null));
         return rect;
@@ -242,14 +237,6 @@ public class Steve implements CharacterColisionable, Resolucion{
         return actual;
     }
 
-    public void setDeath(Image death) {
-        this.death = death;
-    }
-
-    public Image getDeath() {
-        return death;
-    }
-
     public int getI() {
         return i;
     }
@@ -281,6 +268,7 @@ public class Steve implements CharacterColisionable, Resolucion{
     public void setJ(int j) {
         this.j = j;
     }
+
     public void setI(int j) {
         this.i = j;
     }

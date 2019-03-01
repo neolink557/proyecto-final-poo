@@ -22,13 +22,7 @@ import ObjetosEscenario.Rocas;
 import ObjetosEscenario.Trofeo;
 import ObjetosEscenario.WinTittle;
 import Sounds.BackSound;
-import Sounds.Deade;
-import Sounds.EnmnemyHit;
-import Sounds.Laser;
-import Sounds.MainDead;
-import Sounds.MainHit;
-import Sounds.Open;
-import Sounds.Win1;
+import Sounds.Sonidos;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -37,49 +31,41 @@ import javax.swing.JOptionPane;
 public class Lienzo extends JPanel implements MouseListener, MouseMotionListener, KeyListener, Resolucion {
 
     private int i, j, h, k, m;
-    private int muertes;
+    private int muertes; // cuantas muerte llevamos (contador)
     private final Steve steve;
     private final StevePower sp;
     private final ArrayList<Enemy> enemigos;
-    private Graphics miG;
-    private Graphics g;
+    private Graphics miG;//guardar las imagenes 
+    private Graphics g;//contexto grafino de ESTE panel
     private final Image imgBuffer;
     private final BackGrounds bg;
-    private final Timer timer;
+    private final Timer timer;//actualizar imagenes cada X tiempo
     private final Arboles arboles = new Arboles();
     private final Arboles arboles2 = new Arboles();
     private final Arboles arboles3 = new Arboles();
     private final Cama cama = new Cama();
     private final Mesa mesa = new Mesa();
     private final Chimenea chi = new Chimenea();
-    private final boolean instadeath = false;
-    private int cambioescenario = 0;
-    private final int numeroenemigos =6;
+    private int cambioescenario = 0;//cada vez que creuce puerta cambia
+    private final int numeroenemigos = 6;//spawn de enemigos
     private int totalmuertes = 0;
-    private boolean generated = false;
+    private boolean generated = false;//generar enemigos
     private final Puntaje puntaje = new Puntaje();
     private final Vida vida = new Vida();
-    int oleada = 1;
-    private final BackSound fondo = new BackSound();
-    private final Laser laser = new Laser();
-    private final EnmnemyHit eh = new EnmnemyHit();
-    private final MainHit mh = new MainHit();
-    private final Deade deade = new Deade();
-    private final MainDead md = new MainDead();
-    private final Open open = new Open();
-    private boolean abierta = true;
-    private final Rocas rocas = new Rocas();
+    private int oleada = 1;
+    private final BackSound fondo = new BackSound();//Sonido de fondo
+    private final Sonidos clip = new Sonidos();
+    private boolean abierta = true;//puerta para saber si pasa o no al siguiente escenario
+    private final Rocas rocas = new Rocas();//Escenario final
     private final Mago mago = new Mago();
     private final Trofeo trofeo = new Trofeo();
-    private final Win1 win1 = new Win1();
     private final WinTittle wint = new WinTittle();
     private boolean sonar = true;
 
-    public Lienzo(Steve steve, StevePower powa) {
+    public Lienzo(Steve steve, StevePower powa) {//deben ser lo mismo con los que inicia el juego
         bg = new BackGrounds();
         this.steve = steve;
         this.sp = powa;
-        vida.update(i, i);
         enemigos = new ArrayList<Enemy>();
         fondo.start();
 
@@ -90,16 +76,16 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
 
         timer = new Timer();
         setBounds(0, 0, ancho, alto);
-        imgBuffer = new BufferedImage(1920, 1080, BufferedImage.OPAQUE);
-        timer.schedule(new Actualizador(), 0, 100);
+        imgBuffer = new BufferedImage(1920, 1080, BufferedImage.OPAQUE);//pinta todas las imagenes
+        timer.schedule(new Actualizador(), 0, 100);//actualiza cada X tiempo
     }
 
     public void paint(Graphics g) {
         this.g = g;
         miG = imgBuffer.getGraphics();
-        puntaje.setData("muertes: " + Integer.toString(muertes));
+        puntaje.setData("muertes: " + Integer.toString(muertes));//pinta muertes
 
-        if (muertes >= totalmuertes) {
+        if (muertes >= totalmuertes) {//generar oleadas (4)
 
             if (oleada < 5) {
                 generated = true;
@@ -109,27 +95,24 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
                 generated = false;
             }
 
-            bg.DrawBack(miG, 1);
+            bg.DrawBack(miG, 1);//mismo escenario con la puerta abierta
 
-            if (steve.getRect().intersects(bg.getRect())) {
+            if (steve.getRect().intersects(bg.getRect())) {//si cruza puerta cambia escenario
                 cambioescenario++;
-                abierta=false;
+                abierta = false;
                 steve.setX(1000);
                 steve.setY(800);
-
             }
-
         }
-        if (muertes == numeroenemigos*oleada && sonar == true) {
+        if (muertes == numeroenemigos * oleada && sonar == true) {//sonar una sola vez completando oleada
             sonar = false;
-            open.run();
-            abierta=true;
-        }else if((numeroenemigos*5)-1 == muertes)
-        {
+            clip.run(8);
+            abierta = true;
+        } else if ((numeroenemigos * 5) - 1 == muertes) {
             sonar = true;
         }
 
-        if (cambioescenario == 1) {
+        if (cambioescenario == 1) {//Pone scenario (nieve)
             bg.DrawBack(miG, 2);
             mesa.setX(1500);
             mesa.setY(600);
@@ -141,32 +124,43 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
             arboles2.DrawBack(miG);
             arboles.DrawBack(miG);
 
-            if (generated) {
+            if (generated) {  //se generan nuevos enemigos en el nuevo scenario
                 for (int a = 0; a < numeroenemigos; a++) {
                     totalmuertes++;
                     enemigos.add(new Enemy());
                     Iterator<Enemy> it = enemigos.iterator();
 
-                    while (it.hasNext()) {
+                    while (it.hasNext()) {// mientras siga teniendo enemigos setea vida y velocidad
                         Enemy r = it.next();
-                            r.setVida(15);
-                        r.setVelocidad(150);
-                        System.out.println(r.getVida());
+                        r.setVida(8);
+                        r.setVelocidad(25);
+                        if (steve.CoordX() - r.getX() < 0)//con esto se generan nuevamente alejados steve
+                        {
+                            r.setX(r.getX() + 150);
+                        }
+                        if (steve.CoordY() - r.getY() < 0) {
+                            r.setY(r.getY() + 150);
+                        }
+                        if (steve.CoordX() - r.getX() > 0) {
+                            r.setX(r.getX() - 150);
+                        }
+                        if (steve.CoordY() - r.getY() > 0) {
+                            r.setY(r.getY() - 150);
+                        }
                     }
                 }
                 generated = false;
-                if (muertes%numeroenemigos == 0) {
+                if (muertes % numeroenemigos == 0) {
                     oleada++;
                 }
             }
         }
-        if (cambioescenario >= 2) {
+        if (cambioescenario >= 2) {//Escenario FINAL
             if (steve.isWin() == false) {
                 trofeo.setI(380);
-
             }
 
-            bg.DrawBack(miG, 3);
+            bg.DrawBack(miG, 3);//Dibuja escenario final con levitaciones
             if (rocas.getJ() <= 100) {
                 rocas.setJ(rocas.getJ() + 1);
                 rocas.setI(rocas.getI() + 1);
@@ -194,28 +188,26 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
             rocas.DrawBack(miG);
             mago.DrawBack(miG);
             trofeo.DrawBack(miG);
-            System.out.println(rocas.getJ());
-
         }
 
-        if (muertes < numeroenemigos) {
+        if (muertes < numeroenemigos) {//cuando comienza juego
 
             bg.DrawBack(miG, 0);
 
         }
 
-        if (sp.isActivated()) {
+        if (sp.isActivated()) {//si se activa poder dibujelo
             sp.DrawBack(miG);
         }
 
-        Collision();
+        Collision();  //llama a collision 
         if (sp.isActivated()) {
 
             j++;
             switch (h) {
                 case 0:
-                    sp.perseguir();
-                    steve.setI(6);
+                    sp.perseguir();//sigue mouse
+                    steve.setI(6);//imgen de steve atacando
                     break;
                 case 1:
 
@@ -253,20 +245,20 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
                     break;
             }
 
-            sp.DrawBack(miG);
+            sp.DrawBack(miG);//una vez se acava animacion desaparece poder
             if (j == 5) {
                 sp.setActivated(false);
                 j = 0;
                 sp.setX(3000);
                 sp.setY(3000);
             }
-            steve.setJ(steve.getJ() + 2);
+            steve.setJ(steve.getJ() + 2);//nuevamente steve se setea en posicion 0
             if (steve.getJ() >= 8) {
                 steve.setJ(0);
             }
         }
 
-        Iterator<Enemy> it = enemigos.iterator();
+        Iterator<Enemy> it = enemigos.iterator();//evaluar colisones de enemigos
 
         while (it.hasNext()) {
             Enemy r = it.next();
@@ -274,11 +266,11 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
             if (r.isCol() == 2) {
                 r.setK(r.getK() + 1);
 
-                r.DrawDeath(miG, r.getK());
+                r.DrawDeath(miG, r.getK());//k sirve para guardar pos imagen muerte y votar sonido
                 if (r.getK() == 11) {
-                    deade.run();
+                    clip.run(1);
                 }
-                if (r.getK() == 18) {
+                if (r.getK() == 18) {//desaparecen enemigos
                     r.setX(-500);
                     r.setY(-500);
                     r.setCol(2);
@@ -303,21 +295,21 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
                 r.update(i, r.isCol());
             }
         }
-        if (steve.getCol() == 3) {
+        if (steve.getCol() == 3) {//si le quitan vida resta vida
             if (steve.getVida() <= 1) {
                 vida.setI(0);
 
-                md.run();
+                clip.run(5);
 
             } else {
                 vida.setI(steve.getVida() - 1);
             }
         }
 
-        steve.DrawChar(steve.getActual(), miG);
+        steve.DrawChar(steve.getActual(), miG);//Dibuja
         puntaje.DrawBack(miG);
         vida.DrawBack(miG);
-        if (steve.isWin() == true) {
+        if (steve.isWin() == true) {//Muestra imagen ganaste
             wint.DrawBack(miG);
         }
         Image tmp = imgBuffer.getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
@@ -326,21 +318,14 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void keyPressed(KeyEvent e) {
-        
+
         steve.update(e.getKeyCode(), steve.getCol());
 
-        if(e.getKeyCode() == 27)
-        {
-            int option =JOptionPane.showConfirmDialog(null, "Seguro desea salir?", "warning",JOptionPane.YES_NO_OPTION);
-            
-            if(option==JOptionPane.YES_OPTION)
-            {
+        if (e.getKeyCode() == 27) {
+            int option = JOptionPane.showConfirmDialog(null, "Seguro desea salir?", "warning", JOptionPane.YES_NO_OPTION);
+
+            if (option == JOptionPane.YES_OPTION) {
                 System.exit(0);
             }
         }
@@ -348,55 +333,15 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-       
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-       
-         h=steve.getI();
-        laser.run();
+    public void mousePressed(MouseEvent e) {//cuando se detecteta tira poder
+        h = steve.getI();
+        clip.run(4);
         sp.setX1(e.getX());
         sp.setY1(e.getY());
         h = steve.getI();
         sp.setX(steve.CoordX());
         sp.setY(steve.CoordY());
         sp.perseguir();
-        
-
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
     }
 
     public void Collision() {
@@ -483,7 +428,7 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
             if (r.getVida() <= 0) {
                 r.setCol(2);
             } else if (sp.getRect().intersects(r.getRect())) {
-                eh.run();
+                clip.run(2);
                 r.setVida(r.getVida() - 1);
                 r.setCol(5);
                 switch (r.getLastkey()) {
@@ -496,11 +441,11 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
 
                         break;
                     case 83:
-                        r.setY(r.getY() + 50);
+                        r.setY(r.getY() - 50);
 
                         break;
                     case 87:
-                        r.setY(r.getY() - 50);
+                        r.setY(r.getY() + 50);
 
                         break;
 
@@ -576,7 +521,7 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
         while (it3.hasNext()) {
             Enemy r = it3.next();
             if (steve.getRect().intersects(r.getRect())) {
-                mh.run();
+                clip.run(6);
                 steve.setCol(3);
                 switch (steve.getLastkey()) {
                     case 65:
@@ -602,19 +547,51 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
         if (steve.getRect().intersects(trofeo.getRect())) {
             trofeo.setI(-3800);
             steve.setWin(true);
-            win1.run();
+            clip.run(9);
 
         }
 
     }
 
-    private class Actualizador extends TimerTask {
+    private class Actualizador extends TimerTask {//actualiza la imagen de todo el lienzo
 
         @Override
         public void run() {
-
             repaint();
         }
 
+    }
+
+    //SON OBTENIDOS DE LAS INFERFACES MouseListener,MouseMotionListener, KeyListener (POLIMORFISMO) - NO CUMPLEN FUNCION EN ESTA CLASE
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
     }
 }
